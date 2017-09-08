@@ -60,7 +60,7 @@ var pf_lang_a001=pf_zhcn?'请勿重复运行':'Alerady in process';
 var pf_lang_a002=pf_zhcn?'本页无法运行':'Incorrect usage';
 var pf_lang_a003=pf_zhcn?'不正确的输入':'Illegal input';
 var pf_lang_c001=pf_zhcn?'页面读取失败，是否重试？':'Pageload failed, Retry?';
-var pf_lang_c002=pf_zhcn?'是否加载原图？（需要下载权限且配额充足）':'Track Orign?';
+var pf_lang_c002=pf_zhcn?'是否加载原图？（需要下载权限且配额充足）':'Track Orign? (Needs download authority and enough quota)';
 var pf_lang_p001=pf_zhcn?'输入图片范围（起始,结束），填写“0”加载全部：':'Input picture range (from,to), leave "0" to load all:';
 var pf_doing,pf_orign;
 if(pf_doing){alert(pf_lang_a001);}else{pf_mainload();};
