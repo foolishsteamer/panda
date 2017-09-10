@@ -20,7 +20,7 @@ var xhr=new XMLHttpRequest();
 xhr.open('GET','https://exhentai.org/g/'+gid+'/'+token+'/?p='+(numb-1),true);
 xhr.onerror=function(e){if(confirm(pf_lang_c001)){pf_pageload(gid,token,numb,exec);}else{pf_doing=false;}};
 xhr.onreadystatechange=function(e){if(xhr.readyState===4 && xhr.status===200){
-var gdtm=xhr.responseText.match(/<div class="gdtm"(?:.*?)https:\/\/exhentai\.org\/s\/(\w+)\/(\d+)-(\d+)(?:.*?)<\/div>/g);
+var gdtm=xhr.responseText.match(/<div class="gdtm"(.*?)>(.*?)https:\/\/exhentai\.org\/s\/(\w+)\/(\d+)-(\d+)(.*?)<\/div>/g);
 var info={};
 gdtm.forEach(function(value){var preg=value.match(/https:\/\/exhentai\.org\/s\/(\w+)\/(\d+)-(\d+)/);info[preg[3]]=preg[1];});
 exec(info);
@@ -46,7 +46,7 @@ for(var numb=pf_pagefrom;numb<=pf_pagefinl;numb++){
 pf_pageload(gid,token,numb,function(info){
 pf_hashmap=Object.assign(pf_hashmap,info);
 console.log(pf_hashmap);
-if(Object.keys(pf_hashmap).length==(pf_filefinl-pf_filefrom+1)){
+if(Object.keys(pf_hashmap).length==pf_pagetote){
 document.body.innerHTML='<div id="pf_list" style="margin:24px auto;width:720px;max-width:100%;text-align:center;"><h1><a href="javascript:;" onclick="window.location.reload();" style="text-decoration:none;">PandaFap: '+gid+' {'+pf_filefrom+','+pf_filefinl+'} ('+pf_filenavi[3]+')</a></h1><br /></div>';
 for(var numb=pf_filefrom;numb<=pf_filefinl;numb++){
 document.getElementById('pf_list').innerHTML+='<img id="pf_file_'+numb+'" src="" alt="" style="margin:4px 0;max-width:100%;min-width:100px;min-height:100px;background:#000;" onclick="pf_fileload(gid,'+numb+',\''+pf_hashmap[numb]+'\',this.alt,function(info){if(!info){return;};var file=document.getElementById(\'pf_file_\'+info.numb);file.src=pf_orign?info.full:info.show;file.alt=info.adds;})" /><br />';
