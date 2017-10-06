@@ -88,4 +88,4 @@ if(panda_lock){alert(panda_lang_a001);}
 else if(document.domain!='exhentai.org'){alert(panda_lang_a002);}
 else if(!document.head.innerHTML.match(/<link(.*?)exhentai(.*?)>/)){panda_leapover();}
 else if(document.getElementById('gdt')){panda_listshow();}
-else{alert('qiukong.com');};
+else{alert('Incorrept Usage');};
