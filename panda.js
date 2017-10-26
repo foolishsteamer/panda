@@ -73,10 +73,12 @@ panda_lock=true;
 for(var numb=panda_pagefrom;numb<=panda_pagefinl;numb++){
 panda_loadpage(gid,token,numb,function(info){
 panda_hashmaps=Object.assign(panda_hashmaps,info);
+if(Math.ceil(Object.keys(panda_hashmaps).length/panda_pagetote)==(panda_pagefinl-panda_pagefrom+1)){
 document.body.innerHTML='<div id="panda_list" style="margin:24px auto;width:720px;max-width:100%;text-align:center;"><h1><a href="javascript:;" onclick="window.location.reload();" style="text-decoration:none;">Panda: '+gid+' {'+panda_filefrom+','+panda_filefinl+'} ('+panda_filenavi[3]+')</a></h1><br /></div>';
 for(var numb=panda_filefrom;numb<=panda_filefinl;numb++){
 document.getElementById('panda_list').innerHTML+='<img id="panda_file_'+numb+'" src="" alt="" style="margin:4px 0;max-width:100%;min-width:100px;min-height:100px;background:#000;" onclick="panda_loadfile(gid,'+numb+',\''+panda_hashmaps[numb]+'\',this.alt,function(info){if(!info){return;};var file=document.getElementById(\'panda_file_\'+info.numb);file.src=info.'+(panda_fileorig?'full':'show')+';file.alt=info.adds;})" /><br />';
 document.getElementById('panda_file_'+numb).click();
+};
 };
 });
 };
