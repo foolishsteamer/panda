@@ -27,6 +27,7 @@ document.cookie='ipb_member_id='+panda_memberid+';path=/;domain=.exhentai.org';
 document.cookie='ipb_pass_hash='+panda_passhash+';path=/;domain=.exhentai.org';
 document.cookie='igneous='+panda_igneous+';path=/;domain=.exhentai.org';
 document.cookie='yay=0;path=/;domain=.exhentai.org';
+window.location.reload();
 };
 }};
 xhr.send(null);
