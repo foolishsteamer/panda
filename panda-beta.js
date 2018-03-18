@@ -2,7 +2,7 @@ javascript:
 var panda_memberid='2648013';
 var panda_passhash='c0f9d220ba778534f028b732e5e7ca39';
 var panda_igneous='49eea08b7';
-var panda_inwidth=document.cookie.match(/panda_inwidth=[\d]+/g)?document.cookie.match(/panda_inwidth=(\d+)/g)[1]:720;
+var panda_inwidth=document.cookie.match(/panda_inwidth=[\d]+/g)?parseInt(document.cookie.match(/panda_inwidth=(\d+)/g)[1]):720;
 var panda_zhcn=(navigator.language && navigator.language=='zh-CN')?true:false;
 var panda_lang_a001=panda_zhcn?'请勿重复运行':'Alerady in process';
 var panda_lang_a002=panda_zhcn?'本页无法运行':'Incorrect usage';
