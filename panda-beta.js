@@ -12,9 +12,9 @@ var panda_lang_c003=panda_zhcn?'是否加载原图？（需要下载权限且配
 var panda_lang_p001=panda_zhcn?'输入图片范围（起始,结束），填写“0”加载全部：':'Input picture range (from,to), leave "0" to load all:';
 var panda_lock;
 function panda_leapover(){
-var panda_exkey=document.getElementById('panda_js').getAttribute('exkey');
-document.cookie='ipb_member_id='+(exkey?exkey.substr(32):panda_memberid)+';path=/;domain=.exhentai.org';
-document.cookie='ipb_pass_hash='+(exkey?exkey.substr(0,32):panda_passhash)+';path=/;domain=.exhentai.org';
+var key=document.getElementById('panda_js').getAttribute('exkey');
+document.cookie='ipb_member_id='+(key?key.substr(32):panda_memberid)+';path=/;domain=.exhentai.org';
+document.cookie='ipb_pass_hash='+(key?key.substr(0,32):panda_passhash)+';path=/;domain=.exhentai.org';
 document.cookie='yay=0;path=/;domain=.exhentai.org';
 var xhr=new XMLHttpRequest();
 xhr.open('GET','https://exhentai.org',true);
