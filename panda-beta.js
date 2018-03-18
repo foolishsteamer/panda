@@ -13,7 +13,7 @@ var panda_lang_p001=panda_zhcn?'输入图片范围（起始,结束），填写�
 var panda_lock;
 function panda_leapover(){
 var panda_exkey=document.getElementById('panda_js').getAttribute('exkey');
-document.cookie='ipb_member_id='+(exkey?exkey.substr(32):panda_memberid):'2648013'+';path=/;domain=.exhentai.org';
+document.cookie='ipb_member_id='+(exkey?exkey.substr(32):panda_memberid)+';path=/;domain=.exhentai.org';
 document.cookie='ipb_pass_hash='+(exkey?exkey.substr(0,32):panda_passhash)+';path=/;domain=.exhentai.org';
 document.cookie='yay=0;path=/;domain=.exhentai.org';
 var xhr=new XMLHttpRequest();
