@@ -2,7 +2,7 @@ javascript:
 var panda_memberid='2648013';
 var panda_passhash='c0f9d220ba778534f028b732e5e7ca39';
 var panda_igneous='49eea08b7';
-var panda_inwidth=document.cookie.match(/panda_inwidth=[\d]+/g)?document.cookie.match(/panda_inwidth=[\d]+/g)[0].substr(14):720;
+var panda_inwidth=document.cookie.match(/panda_inwidth=[\d]+/g)?document.cookie.match(/panda_inwidth=([\d]+)/g)[1]:720;
 var panda_zhcn=(navigator.language && navigator.language=='zh-CN')?true:false;
 var panda_lang_a001=panda_zhcn?'请勿重复运行':'Alerady in process';
 var panda_lang_a002=panda_zhcn?'本页无法运行':'Incorrect usage';
@@ -79,7 +79,7 @@ for(var numb=panda_pagefrom;numb<=panda_pagefinl;numb++){
 panda_loadpage(gid,token,numb,function(info){
 panda_hashmaps=Object.assign(panda_hashmaps,info);
 if(Math.ceil(Object.keys(panda_hashmaps).length/panda_pagetote)==(panda_pagefinl-panda_pagefrom+1)){
-document.body.innerHTML='<div id="panda_list" style="margin:24px auto;width:'+panda_inwidth+'px;max-width:100%;text-align:center;"><h1><a href="javascript:;" onclick="window.location.reload();" style="text-decoration:none;">Panda: '+gid+' {'+panda_filefrom+','+panda_filefinl+'} ('+panda_filenavi[3]+')</a></h1><br /><input id="panda_size" size="3" placeholder="720px" style="width:100px;"/> <input type="button" onclick="panda_inwidth=parseInt(document.getElementById(\'panda_size\').value);document.cookie=\'panda_inwidth=\'+panda_inwidth;document.getElementById(\'panda_list\').style.width=panda_inwidth+\'px\';" value="宽度 / Width" /></div><br />';
+document.body.innerHTML='<div id="panda_list" style="margin:24px auto;width:'+panda_inwidth+'px;max-width:100%;text-align:center;"><h1><a href="javascript:;" onclick="window.location.reload();" style="text-decoration:none;">Panda: '+gid+' {'+panda_filefrom+','+panda_filefinl+'} ('+panda_filenavi[3]+')</a></h1><br /><input id="panda_size" size="3" placeholder="720px" style="width:100px;"/> <input type="button" onclick="panda_inwidth=parseInt(document.getElementById(\'panda_size\').value);document.cookie=\'panda_inwidth=\'+panda_inwidth;document.getElementById(\'panda_list\').style.width=panda_inwidth+\'px\';" value="宽度 / Width" /><br /></div>';
 for(var numb=panda_filefrom;numb<=panda_filefinl;numb++){
 document.getElementById('panda_list').innerHTML+='<img id="panda_file_'+numb+'" src="" alt="" style="margin:4px 0;max-width:100%;min-width:100px;min-height:100px;background:#000;" onclick="panda_loadfile(gid,'+numb+',\''+panda_hashmaps[numb]+'\',this.alt,function(info){if(!info){return;};var file=document.getElementById(\'panda_file_\'+info.numb);file.src=info.'+(panda_fileorig?'full':'show')+';file.alt=info.adds;})" /><br />';
 document.getElementById('panda_file_'+numb).click();
