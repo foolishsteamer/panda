@@ -1,8 +1,7 @@
 javascript:
-var panda_exkey=document.getElementById('panda_js').getAttribute('exkey');
-var panda_memberid=exkey?exkey.substr(32):'2648013';
-var panda_passhash=exkey?exkey.substr(0,32):'c0f9d220ba778534f028b732e5e7ca39';
-var panda_igneous=exkey?'':'49eea08b7';
+var panda_memberid='2648013';
+var panda_passhash='c0f9d220ba778534f028b732e5e7ca39';
+var panda_igneous='49eea08b7';
 var panda_zhcn=(navigator.language && navigator.language=='zh-CN')?true:false;
 var panda_lang_a001=panda_zhcn?'请勿重复运行':'Alerady in process';
 var panda_lang_a002=panda_zhcn?'本页无法运行':'Incorrect usage';
@@ -14,9 +13,6 @@ var panda_lang_p001=panda_zhcn?'输入图片范围（起始,结束），填写�
 var panda_lock;
 function panda_leapover(){
 var panda_exkey=document.getElementById('panda_js').getAttribute('exkey');
-var panda_memberid='2648013';
-var panda_passhash='c0f9d220ba778534f028b732e5e7ca39';
-var panda_igneous='49eea08b7';
 document.cookie='ipb_member_id='+(exkey?exkey.substr(32):panda_memberid):'2648013'+';path=/;domain=.exhentai.org';
 document.cookie='ipb_pass_hash='+(exkey?exkey.substr(0,32):panda_passhash)+';path=/;domain=.exhentai.org';
 document.cookie='yay=0;path=/;domain=.exhentai.org';
