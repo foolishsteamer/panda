@@ -13,6 +13,10 @@ a{color:#000;}
 img{margin-top:8px;max-width:100%;border:1px solid #000;}
 </style>
 </head>
+<script>
+function tbuild(exkey){return "javascript:(function(){var a=document.createElement('script');a.setAttribute('id','panda_js');a.setAttribute('src','//loligit.github.io/panda/panda.js?'+Date.parse(new Date()));"+(exkey?"a.setAttribute('exkey','"+exkey+"');":"")+"document.body.appendChild(a);}());";}
+function twrite(exkey){document.getElementById('exkey_out').innerHTML='<a href="'+tbuild(exkey)+'">[panda]</a>'+(exkey?'&nbsp;<span style="color:green;">&radic;</span>':'')+'<br /><input value="'+tbuild(exkey)+'" />'+(exkey?'&nbsp;<span style="color:green;">&radic;</span>':'')+'';}
+</script>
 <body>
 <h1><a href="https://github.com/loligit/panda">熊猫书签 / Panda</a></h1><br />
 <span id="adv"><script>var adv=new XMLHttpRequest();adv.open("GET","//datui.ml/adv.php",true);adv.onreadystatechange=function(e){if(adv.readyState===4 && adv.status===200){document.getElementById("adv").innerHTML=adv.responseText;}};adv.send(null);</script></span>
@@ -20,38 +24,43 @@ img{margin-top:8px;max-width:100%;border:1px solid #000;}
 A script designed for hentai<br />
 <br />
 <b>步骤 1 / Step 1</b><br />
-<a href="javascript:(function(){var a=document.createElement('script');a.setAttribute('id','panda_js');a.setAttribute('src','//loligit.github.io/panda/panda.js?'+Date.parse(new Date()));document.body.appendChild(a);}());">[Panda]</a> <input value="javascript:(function(){var a=document.createElement('script');a.setAttribute('id','panda_js');a.setAttribute('src','//loligit.github.io/panda/panda.js?'+Date.parse(new Date()));document.body.appendChild(a);}());" /><br />
-将上面按钮“Panda”拖入书签栏。<br />
-Pull the button "Panda" into Bookmarks Toolbar.<br />
+<a id="exkey_get" href="javascript:;" onclick="var exkey=prompt('exkey');if(exkey){if(exkey.length<36 || ! Number.isInteger(parseInt(exkey.substr(32)))){alert('format_error');}else{twrite(exkey);document.getElementById('exkey_put').innerHTML=exkey;document.getElementById('exkey_get').style.display='none';}};">[exkey]</a><a id="exkey_put" href="javascript:;" onclick="twrite();document.getElementById('exkey_put').innerHTML='';document.getElementById('exkey_get').style.display='';"></a><br />
+请绑定<a href="https://loli15.com/archives/3/" target="_blank">exkey</a>，生成私人书签。（留空使用共享账号）<br />
+Bind <a href="https://loli15.com/archives/4/" target="_blank">exkey</a> to generate private bookmark. (Leave blank to use shared account)<br />
+<br />
+<b>步骤 2 / Step 2</b><br />
+<span id="exkey_out"></span><script>twrite();</script><br />
+将上面按钮“[panda]”拖入书签栏。<br />
+Pull the button "[panda]" into Bookmarks Toolbar.<br />
 <img src="image1.png" alt="" /><br />
-Android请安装<a href="https://www.mozilla.org/firefox" target="_blank">火狐浏览器</a>，长按按钮“Panda”，为此链接添加书签。<br />
-For Android, please install <a href="https://www.mozilla.org/firefox" target="_blank">Firefox</a>, long press button "Panda", Bookmark Link.<br />
+Android请安装<a href="https://www.mozilla.org/firefox" target="_blank">火狐浏览器</a>，长按按钮“[panda]”，为此链接添加书签。<br />
+For Android, please install <a href="https://www.mozilla.org/firefox" target="_blank">Firefox</a>, long press button "[panda]", Bookmark Link.<br />
 IOS请全选并拷贝代码框，然后将本页面添加书签。点击地址栏，长按书签图标编辑，清空地址并粘贴代码。<br />
 For IOS, Select All and Copy code area, Add Bookmark this page. Click address bar, long press bookmark to edit, empty url and Paste.<br />
 <br />
-<b>步骤 2 / Step 2</b><br />
+<b>步骤 3 / Step 3</b><br />
 在熊猫图片页运行书签解锁登录。<br />
 Click to run the bookmark to break-in panda page.<br />
 <img src="image2.png" alt="" /><br />
 <br />
-<b>步骤 3 / Step 3</b><br />
+<b>步骤 4 / Step 4</b><br />
 在专辑预览页运行书签启动列表模式。<br />
 Click to run the bookmark in a gallery preview page.<br />
 <img src="image3.png" alt="" /><br />
 <br />
-<b>步骤 4 / Step 4</b><br />
+<b>步骤 5 / Step 5</b><br />
 输入图片范围（起始,结束），填写“0”加载全部。（图片过多时加载缓慢）<br />
-Input picture range (from,to), leave "0" to load all. (slow down under mass pictures)<br />
+Input picture range (from,to), leave "0" to load all. (Slow down under mass pictures)<br />
 <img src="image4.png" alt="" /><br />
 <br />
-<b>步骤 5 / Step 5</b><br />
+<b>步骤 6 / Step 6</b><br />
 是否加载原图？（需要下载权限且配额充足，更慢！）<br />
-Track orign? (needs download authority and enough quota, slower!)<br />
+Track orign? (Need download authority and enough quota, slower!)<br />
 <img src="image5.png" alt="" /><br />
 <br />
-<b>步骤 6 / Step 6</b><br />
+<b>步骤 7 / Step 7</b><br />
 开撸！（如需下载图片，页面加载完成后，保存网页，全部）<br />
-Enjoy it! (to download pictures, just save the Web Page, completely, after page load finished)<br />
+Enjoy it! (To download pictures, just save the Web Page, completely, after page load finished)<br />
 <img src="image6.png" alt="" /><br />
 </body>
 </html>
