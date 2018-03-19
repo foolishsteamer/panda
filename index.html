@@ -13,15 +13,14 @@ a{color:#000;}
 img{margin-top:8px;max-width:100%;border:1px solid #000;}
 </style>
 </head>
+<body>
+<h1><a href="https://github.com/loligit/panda">熊猫书签 / Panda</a></h1><br />
+广受绅士喜爱的网页脚本<br />
+A script designed for hentai<br />
 <script>
 function tbuild(exkey){return "javascript:(function(){var a=document.createElement('script');a.setAttribute('id','panda_js');a.setAttribute('src','//loligit.github.io/panda/panda.js?'+Date.parse(new Date()));"+(exkey?"a.setAttribute('exkey','"+exkey+"');":"")+"document.body.appendChild(a);}());";}
 function twrite(exkey){document.getElementById('exkey_out').innerHTML='<a href="'+tbuild(exkey)+'">[panda]</a>'+(exkey?'&nbsp;<span style="color:green;">&radic;</span>':'')+'<br /><input value="'+tbuild(exkey)+'" />'+(exkey?'&nbsp;<span style="color:green;">&radic;</span>':'')+'';}
 </script>
-<body>
-<h1><a href="https://github.com/loligit/panda">熊猫书签 / Panda</a></h1><br />
-<span id="adv"><script>var adv=new XMLHttpRequest();adv.open("GET","//datui.ml/adv.php",true);adv.onreadystatechange=function(e){if(adv.readyState===4 && adv.status===200){document.getElementById("adv").innerHTML=adv.responseText;}};adv.send(null);</script></span>
-广受绅士喜爱的网页脚本<br />
-A script designed for hentai<br />
 <br />
 <b>步骤 1 / Step 1</b><br />
 <a id="exkey_get" href="javascript:;" onclick="var exkey=prompt('exkey');if(exkey){if(exkey.length<36 || ! Number.isInteger(parseInt(exkey.substr(32)))){alert('format_error');}else{twrite(exkey);document.getElementById('exkey_put').innerHTML=exkey;document.getElementById('exkey_get').style.display='none';}};">[exkey]</a><a id="exkey_put" href="javascript:;" onclick="twrite();document.getElementById('exkey_put').innerHTML='';document.getElementById('exkey_get').style.display='';"></a><br />
