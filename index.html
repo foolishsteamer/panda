@@ -5,36 +5,50 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
 <meta name="keywords" content="熊猫书签,Panda" />
 <meta name="description" content="熊猫书签,Panda" />
-<title>熊猫书签 / Panda</title>
+<title>熊猫书签</title>
 <style>
-body{margin:60px auto;width:720px;max-width:95%;font-size:14px;font-family:Microsoft Yahei;line-height:30px;word-wrap:break-word;word-break:break-all;}
-h1 a{text-decoration:none;}
-a{color:#000;}
+body{margin:0;padding:0;background:#EEE;font-size:14px;font-family:Microsoft Yahei;line-height:30px;word-wrap:break-word;word-break:break-all;}
+a{color:#000;text-decoration:none;}
+.navi{background:#CCC;font-size:0;}
+.navi div{margin:auto;width:720px;max-width:100%;text-align:center;}
+.navi a{display:inline-block;width:20%;padding:2px 2px 4px 2px;box-sizing:border-box;font-size:14px;vertical-align:top;font-weight:bold;}
+.navi a.current{background:#EEE;}
+.main{margin:auto;padding:40px 30px;box-sizing:border-box;width:720px;max-width:100%;}
 img{margin-top:8px;max-width:100%;border:1px solid #000;}
 </style>
 </head>
 <body>
-<h1><a href="https://github.com/loligit/panda">熊猫书签 / Panda</a></h1><br />
+<div class="navi">
+<div>
+<a href="javascript:;" onclick="alert('\( O w O \)');">熊猫</a>
+<a class="current" href="https://loligit.github.io/panda/">书签</a>
+<a href="http://exxx.ml">解锁</a>
+<a href="https://ccloud.pro">看图</a>
+<a href="https://uids.net/thread-170.htm" target="_blank">帮助</a>
+</div>
+</div>
+<div class="main">
+<b>熊猫书签 / Panda</b><br />
 广受绅士喜爱的网页脚本<br />
 A script designed for hentai<br />
 <script>
-function tbuild(exkey){return "javascript:(function(){var a=document.createElement('script');a.setAttribute('id','panda_js');a.setAttribute('src','//loligit.github.io/panda/panda.js?'+Date.parse(new Date()));"+(exkey?"a.setAttribute('exkey','"+exkey+"');":"")+"document.body.appendChild(a);}());";}
+function tbuild(exkey){return "javascript:(function(){var a=document.createElement('script');a.setAttribute('id','panda_js');a.setAttribute('src','//"+window.location.hostname+window.location.pathname.substring(0,window.location.pathname.lastIndexOf('/'))+"/panda.js?'+Date.parse(new Date()));"+(exkey?"a.setAttribute('exkey','"+exkey+"');":"")+"document.body.appendChild(a);}());";}
 function twrite(exkey){document.getElementById('exkey_out').innerHTML='<a href="'+tbuild(exkey)+'">[panda]</a>'+(exkey?'&nbsp;<span style="color:green;">&radic;</span>':'')+'<br /><input value="'+tbuild(exkey)+'" />'+(exkey?'&nbsp;<span style="color:green;">&radic;</span>':'')+'';}
 </script>
 <br />
 <b>步骤 1 / Step 1</b><br />
 <a id="exkey_get" href="javascript:;" onclick="var exkey=prompt('exkey');if(exkey){if(exkey.length<36 || ! Number.isInteger(parseInt(exkey.substr(32)))){alert('格式错误\r\nFormat error');}else{twrite(exkey);document.getElementById('exkey_put').innerHTML=exkey;document.getElementById('exkey_get').style.display='none';}};">[exkey]</a><a id="exkey_put" href="javascript:;" onclick="twrite();document.getElementById('exkey_put').innerHTML='';document.getElementById('exkey_get').style.display='';"></a><br />
-请绑定<a href="https://uids.net/thread-170.htm" target="_blank">exkey</a>，生成私人书签。（留空使用共享账号）<br />
-Bind <a href="https://uids.net/thread-170.htm" target="_blank">exkey</a> to generate private bookmark. (Leave blank to use shared account)<br />
+请绑定<a href="https://uids.net/thread-170.htm" target="_blank"><u>exkey</u></a>，生成私人书签。（留空使用共享账号）<br />
+Bind <a href="https://uids.net/thread-170.htm" target="_blank"><u>exkey</u></a> to generate private bookmark. (Leave blank to use shared account)<br />
 <br />
 <b>步骤 2 / Step 2</b><br />
 <span id="exkey_out"></span><script>twrite();</script><br />
 将上面按钮“[panda]”拖入书签栏。<br />
 Pull the button "[panda]" into Bookmarks Toolbar.<br />
 <img src="image1.png" alt="" /><br />
-Android请安装<a href="https://www.mozilla.org/firefox" target="_blank">火狐浏览器</a>，长按按钮“[panda]”，为此链接添加书签。<br />
-For Android, please install <a href="https://www.mozilla.org/firefox" target="_blank">Firefox</a>, long press button "[panda]", Bookmark Link.<br />
-IOS请全选并拷贝代码框，然后将本页面添加书签。点击地址栏，长按书签图标编辑，清空地址并粘贴代码。<br />
+Android请使用<a href="https://www.mozilla.org/firefox" target="_blank"><u>Firefox</u></a>，长按按钮“[panda]”，为此链接添加书签。<br />
+For Android, please install <a href="https://www.mozilla.org/firefox" target="_blank"><u>Firefox</u></a>, long press button "[panda]", Bookmark Link.<br />
+IOS请全选复制代码，然后将本页面添加书签。点击地址栏，长按书签图标编辑，清空地址并粘贴代码。<br />
 For IOS, Select All and Copy code area, Add Bookmark this page. Click address bar, long press bookmark to edit, empty url and Paste.<br />
 <br />
 <b>步骤 3 / Step 3</b><br />
@@ -61,5 +75,8 @@ Track orign? (Need download authority and enough quota, slower!)<br />
 开撸！（如需下载图片，页面加载完成后，保存网页，全部）<br />
 Enjoy it! (To download pictures, just save the Web Page, completely, after page load finished)<br />
 <img src="image6.png" alt="" /><br />
+<br />
+<a href="https://github.com/loligit/panda" target="_blank"><b>View on Github</b></a><br />
+</div>
 </body>
 </html>
