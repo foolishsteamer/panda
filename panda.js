@@ -15,9 +15,12 @@ var panda_lang_h001=panda_zhcn?'宽度':'Width';
 var panda_lock;
 function panda_leapover(){
 var key=document.getElementById('panda_js')?document.getElementById('panda_js').getAttribute('exkey'):null;
-document.cookie='ipb_member_id='+(key?key.substr(32):panda_memberid)+';path=/;domain=.exhentai.org';
-document.cookie='ipb_pass_hash='+(key?key.substr(0,32):panda_passhash)+';path=/;domain=.exhentai.org';
+if(key){
+document.cookie='ipb_member_id='+key.split('x')[0].substr(32)+';path=/;domain=.exhentai.org';
+document.cookie='ipb_pass_hash='+key.split('x')[0].substr(0,32)+';path=/;domain=.exhentai.org';
+document.cookie='igneous='+(key.split('x')[1]?key.split('x')[1]:'')+';path=/;domain=.exhentai.org';
 document.cookie='yay=0;path=/;domain=.exhentai.org';
+};
 var xhr=new XMLHttpRequest();
 xhr.open('GET','https://exhentai.org',true);
 xhr.onerror=function(e){if(confirm(panda_lang_c001)){panda_leapover();}};
