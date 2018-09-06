@@ -5,7 +5,7 @@ var panda_igneous='c550a3bc1';
 var panda_inwidth=document.cookie.match(/panda_inwidth=[\d]+/)?document.cookie.match(/panda_inwidth=(\d+)/)[1]:720;
 var panda_zhcn=(navigator.language && navigator.language=='zh-CN')?true:false;
 var panda_lang_a001=panda_zhcn?'请勿重复运行':'Alerady in process';
-var panda_lang_a002=panda_zhcn?'本页无法运行，是否跳转？':'Incorrect usage, Go to exhentai?';
+var panda_lang_a002=panda_zhcn?'本页无法运行，是否跳转？':'Incorrect usage, go to exhentai?';
 var panda_lang_a003=panda_zhcn?'不正确的输入':'Illegal input';
 var panda_lang_c001=panda_zhcn?'页面读取失败，是否重试？':'Preload failed, retry?';
 var panda_lang_c002=panda_zhcn?'登录尝试失败，强制进入？（使用公共账号）':'Login failed, break-in? (use public account)';
