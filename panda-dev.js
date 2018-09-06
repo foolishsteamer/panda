@@ -25,15 +25,15 @@ var xhr=new XMLHttpRequest();
 xhr.open('GET','https://exhentai.org',true);
 xhr.onerror=function(e){if(confirm(panda_lang_c001)){panda_leapover();}};
 xhr.onreadystatechange=function(e){if(xhr.readyState===4 && xhr.status===200){
-var html=xhr.responseText;
-if(html.match(/<link(.*?)exhentai(.*?)>/)){window.location.reload();}
-else if(confirm(panda_lang_c002)){
+if(!xhr.responseText.match(/<link(.*?)exhentai(.*?)>/)){
+if(!confirm(panda_lang_c002)){return;};
 document.cookie='ipb_member_id='+panda_memberid+';path=/;domain=.exhentai.org';
 document.cookie='ipb_pass_hash='+panda_passhash+';path=/;domain=.exhentai.org';
 document.cookie='igneous='+panda_igneous+';path=/;domain=.exhentai.org';
 document.cookie='yay=0;path=/;domain=.exhentai.org';
-window.location.reload();
 };
+if(window.location.href=='https://exhentai.org/favicon.ico'){window.location.href='https://exhentai.org';}
+else{window.location.reload();};
 }};
 xhr.send(null);
 };
