@@ -36,8 +36,8 @@ function twrite(exkey){document.getElementById('exkey_out').innerHTML='<a href="
 <br />
 <b>解锁步骤 1.1 / Unlock Step 1.1</b><br />
 <a id="exkey_get" href="javascript:;" onclick="var exkey=prompt('exkey');if(exkey){if(exkey.length<36 || ! Number.isInteger(parseInt(exkey.split('x')[0].substr(32)))){alert('格式错误\r\nFormat error');}else{twrite(exkey);document.getElementById('exkey_put').innerHTML=exkey;document.getElementById('exkey_get').style.display='none';}};">[exkey]</a><a id="exkey_put" href="javascript:;" onclick="twrite();document.getElementById('exkey_put').innerHTML='';document.getElementById('exkey_get').style.display='';"></a><br />
-您可绑定<a href="https://uids.net/thread-170.htm" target="_blank"><u>exkey</u></a>，生成私人书签，大陆需使用增强版exkey。（留空使用共享账号）<br />
-Bind <a href="https://uids.net/thread-170.htm" target="_blank"><u>exkey</u></a> to generate private bookmark. (Leave blank to use shared account)<br />
+您可绑定exkey，生成私人书签，大陆需使用增强版exkey。（留空使用共享账号）<br />
+Bind exkey to generate private bookmark. (Leave blank to use shared account)<br />
 <br />
 <b>解锁步骤 1.2 / Unlock Step 1.2</b><br />
 <span id="exkey_out"></span><script>twrite();</script><br />
