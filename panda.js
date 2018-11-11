@@ -1,7 +1,7 @@
 javascript:
-var panda_memberid='4336008';
-var panda_passhash='d72cead23d3f1999dcac5fb3105c5f07';
-var panda_igneous='74bef0083';
+var panda_memberid='3552014';
+var panda_passhash='008ee27d4c542aa8bc378cb8775851a7';
+var panda_igneous='0163cff1d';
 var panda_inwidth=document.cookie.match(/panda_inwidth=[\d]+/)?document.cookie.match(/panda_inwidth=(\d+)/)[1]:720;
 var panda_zhcn=(navigator.language && navigator.language=='zh-CN')?true:false;
 var panda_lang_a001=panda_zhcn?'请勿重复运行':'Alerady in process';
