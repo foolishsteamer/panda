@@ -17,7 +17,7 @@ var exkey=(mykey && panda)?panda.getAttribute('exkey'):null;
 if(!exkey){
 var xhr=new XMLHttpRequest();
 xhr.open('GET',panda.src.substr(0,panda.src.lastIndexOf('/'))+'/exkey?'+Date.parse(new Date()),true);
-xhr.setRequestHeader('Accept-Encoding','deflate');
+xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
 xhr.responseType='text';
 xhr.onreadystatechange=function(e){if(xhr.readyState===4 && xhr.status===200){exkey=xhr.responseText;if(!exkey){alert(panda_lang_a004);return;};func(exkey);}};
 xhr.send(null);return;
