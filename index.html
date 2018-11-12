@@ -7,74 +7,105 @@
 <meta name="description" content="熊猫书签,Panda Bookmark" />
 <title>熊猫书签</title>
 <style>
-body{margin:0;padding:0;background:#EEE;font-size:14px;font-family:Microsoft Yahei;line-height:30px;word-wrap:break-word;word-break:break-all;}
+body{margin:0;padding:0;font-family:Microsoft Yahei;font-size:14px;line-height:30px;word-wrap:break-word;word-break:break-all;}
 a{color:#000;text-decoration:none;}
-.navi{background:#CCC;font-size:0;}
-.navi div{margin:auto;width:720px;max-width:100%;text-align:center;}
-.navi a{display:inline-block;width:33.33%;padding:2px 2px 4px 2px;box-sizing:border-box;font-size:14px;vertical-align:top;font-weight:bold;}
-.navi a.current{background:#EEE;}
-.main{margin:auto;padding:40px 30px;box-sizing:border-box;width:720px;max-width:100%;}
-.main img{margin-top:8px;max-width:100%;border:1px solid #000;}
+img{max-width:100%;border:0;}
+#intro{margin:auto;padding:180px 20px;box-sizing:border-box;text-align:center;}
+#exkey{display:block;margin:16px auto;width:350px;max-width:100%;height:18px;font-family:Microsoft Yahei;font-size:14px;line-height:30px;}
+#bookmark,#unlocker{margin:auto;padding:60px 20px;box-sizing:border-box;width:720px;max-width:100%;display:none;}
+#bookmark img{margin-top:8px;max-width:100%;border:1px solid #000;}
 </style>
 </head>
 <body>
-<div class="navi">
-<div>
-<a class="current" href="https://loligit.github.io/panda/">书签</a>
-<a href="http://exxx.ml">解锁</a>
-<a href="https://assbbs.com/thread-170.htm" target="_blank">帮助</a>
-</div>
-</div>
-<div class="main">
-<b>熊猫书签 / Panda Bookmark</b><br />
-广受绅士喜爱的网页脚本<br />
-A script designed for hentai<br />
 <script>
-function tbuild(exkey){return "javascript:(function(){var a=document.createElement('script');a.setAttribute('id','panda_js');a.setAttribute('src','//"+window.location.hostname+window.location.pathname.substring(0,window.location.pathname.lastIndexOf('/'))+"/panda.js?'+Date.parse(new Date()));"+(exkey?"a.setAttribute('exkey','"+exkey+"');":"")+"document.body.appendChild(a);}());";}
-function twrite(exkey){document.getElementById('exkey_out').innerHTML='<a href="'+tbuild(exkey)+'">[panda]</a>'+(exkey?'&nbsp;<span style="color:green;">&radic;</span>':'')+'<br /><input value="'+tbuild(exkey)+'" />'+(exkey?'&nbsp;<span style="color:green;">&radic;</span>':'')+'';}
+function homepage(){
+document.getElementById('bookmark').style.display='none';
+document.getElementById('unlocker').style.display='none';
+document.getElementById('intro').style.display='block';
+};
+function exkeyget(func){
+var exkey=document.getElementById('exkey').value;
+if(!exkey){
+var xhr=new XMLHttpRequest();
+xhr.open('GET','exkey?'+Date.parse(new Date()),true);
+xhr.responseType='text';
+xhr.onreadystatechange=function(e){if(xhr.readyState===4 && xhr.status===200){exkey=xhr.responseText;if(!exkey){alert('公共账号失效');return;};func(exkey);}};
+xhr.send(null);return;
+};
+if(exkey.length<36 || ! Number.isInteger(parseInt(exkey.split('x')[0].substr(32)))){alert('格式错误');return;};
+window.location.hash=exkey;
+func(exkey);
+};
+function bookmarkshow(){
+exkeyget(function(exkey){
+var code="javascript:(function(){var a=document.createElement('script');a.setAttribute('id','panda_js');a.setAttribute('src','//"+window.location.hostname+window.location.pathname.substring(0,window.location.pathname.lastIndexOf('/'))+"/panda.js?'+Date.parse(new Date()));"+(document.getElementById('exkey').value?"a.setAttribute('exkey','"+exkey+"');":"")+"document.body.appendChild(a);}());";
+document.getElementById('bookmarkcode').innerHTML='<a href="'+code+'"><b>[panda]</b></a><br /><input value="'+code+'" />';
+document.getElementById('intro').style.display='none';
+document.getElementById('unlocker').style.display='none';
+document.getElementById('bookmark').style.display='block';
+});
+};
+function unlockershow(){
+exkeyget(function(exkey){
+document.getElementById('unlockercode').innerHTML='<a href="http://exxx.ml/?exkey='+exkey+'" target="_blank">点此使用旧版解锁</a>';
+document.getElementById('intro').style.display='none';
+document.getElementById('bookmark').style.display='none';
+document.getElementById('unlocker').style.display='block';
+});
+};
 </script>
-<br />
-<b>解锁步骤 1.1 / Unlock Step 1.1</b><br />
-<a id="exkey_get" href="javascript:;" onclick="var exkey=prompt('exkey');if(exkey){if(exkey.length<36 || ! Number.isInteger(parseInt(exkey.split('x')[0].substr(32)))){alert('格式错误\r\nFormat error');}else{twrite(exkey);document.getElementById('exkey_put').innerHTML=exkey;document.getElementById('exkey_get').style.display='none';}};">[exkey]</a><a id="exkey_put" href="javascript:;" onclick="twrite();document.getElementById('exkey_put').innerHTML='';document.getElementById('exkey_get').style.display='';"></a><br />
-您可绑定exkey，生成私人书签。（留空使用共享账号）<br />
-Bind exkey to generate private bookmark. (Leave blank to use shared account)<br />
-<br />
-<b>解锁步骤 1.2 / Unlock Step 1.2</b><br />
-<span id="exkey_out"></span><script>twrite();</script><br />
-将上面按钮“[panda]”拖入书签栏。<br />
-Pull the button "[panda]" into Bookmarks Toolbar.<br />
-<img src="step12.png" alt="" /><br />
-Android请使用<a href="https://www.mozilla.org/firefox" target="_blank"><u>Firefox</u></a>，长按按钮“[panda]”，为此链接添加书签。<br />
-For Android, please install <a href="https://www.mozilla.org/firefox" target="_blank"><u>Firefox</u></a>, long press button "[panda]", Bookmark Link.<br />
-IOS请全选复制代码，然后将本页面添加书签。点击地址栏，长按书签图标编辑，清空地址并粘贴代码。<br />
-For IOS, Select All and Copy code area, Add Bookmark this page. Click address bar, long press bookmark to edit, empty url and Paste.<br />
-<br />
-<b>解锁步骤 1.3 / Unlock Step 1.3</b><br />
-在任意网址（非空白页）运行书签，点击确定跳转至图标页。<br />
-You can enter the website from any address (except blank page) by using bookmark.<br />
-<img src="step13.png" alt="" /><br />
-<br />
-<b>解锁步骤 1.4 / Unlock Step 1.4</b><br />
-在图标页再次运行书签即可解锁登录。<br />
-Using the bookmark to unlock panda page.<br />
-<img src="step14.png" alt="" /><br />
-<br />
-<b>预览步骤 2.1 / Preview Step 2.1</b><br />
-在专辑预览页运行书签启动列表模式。<br />
-Using the bookmark in gallery preview page.<br />
-<img src="step21.png" alt="" /><br />
-<br />
-<b>预览步骤 2.2 / Preview Step 2.2</b><br />
-输入图片范围（起始,结束），填写“0”加载全部。（图片过多时加载缓慢）<br />
-Input picture range (from,to), leave "0" to load all. (Slow down under mass pictures)<br />
-<img src="step22.png" alt="" /><br />
-<br />
-<b>预览步骤 2.3 / Preview Step 2.3</b><br />
-是否加载原图？（需要下载权限且配额充足，更慢！）<br />
-Track orign? (Need download authority and enough quota, slower!)<br />
-<img src="step23.png" alt="" /><br />
-<br />
-<a href="https://github.com/loligit/panda" target="_blank"><b>View on Github</b></a><br />
+<div id="intro">
+<img src="panda.png" alt="熊猫书签" />
+<input type="text" id="exkey" placeholder="exkey" />
+<input type="button" onclick="bookmarkshow();" value="生成书签" />
+<input type="button" onclick="unlockershow();" value="一键解锁" />
+<br /><br />
+<a href="https://assbbs.com/thread-170.htm" target="_blank">Feedback</a>
+/
+<a href="https://github.com/loligit/panda" target="_blank">Github</a>
+/
+<a href="http://evai.pl" target="_blank">Evai.pl</a>
 </div>
+<div id="bookmark">
+<a href="javascript:;" onclick="homepage();"><b>&larr;&nbsp;返回首页</b></a><br />
+<br />
+<span id="bookmarkcode"></span><br />
+<br />
+<b>解锁 1.1</b><br />
+PC浏览器请直接将按钮“[panda]”拖入书签栏。<br />
+Android请使用<a href="https://www.mozilla.org/firefox" target="_blank"><u>Firefox</u></a>，长按按钮“[panda]”，将链接加入书签。<br />
+IOS请复制代码，将本页添加书签。点击地址栏，长按书签图标编辑，粘贴代码替换网址。<br />
+<img src="panda11.png" alt="" /><br />
+<br />
+<b>解锁 1.2</b><br />
+在任意网址（非空白页）运行书签，点击确定跳转至图标页。<br />
+<img src="panda12.png" alt="" /><br />
+<br />
+<b>解锁 1.3</b><br />
+在图标页再次运行书签即可解锁登录。<br />
+<img src="panda13.png" alt="" /><br />
+<br />
+<b>预览 2.1</b><br />
+在专辑预览页运行书签启动列表模式。<br />
+<img src="panda21.png" alt="" /><br />
+<br />
+<b>预览 2.2</b><br />
+输入图片范围（起始,结束），填写“0”加载全部。（图片过多时加载缓慢）<br />
+<img src="panda22.png" alt="" /><br />
+<br />
+<b>预览 2.3</b><br />
+是否加载原图？（需要下载权限且配额充足，更慢！）<br />
+<img src="panda23.png" alt="" /><br />
+<br />
+</div>
+<div id="unlocker">
+<a href="javascript:;" onclick="homepage();"><b>&larr;&nbsp;返回首页</b></a><br />
+<br />
+很抱歉，新版没有完成。<br />
+<span id="unlockercode"></span><br />
+</div>
+<script>
+if(window.location.hash){document.getElementById('exkey').value=window.location.hash.split('#').pop();};
+</script>
 </body>
 </html>
