@@ -26,11 +26,11 @@ document.getElementById('bookmark').style.display='none';
 document.getElementById('unlocker').style.display='none';
 document.getElementById('intro').style.display='block';
 };
-function exkeyget(func){
+function exkeyget(type,func){
 var exkey=document.getElementById('exkey').value;
 if(!exkey){
 var xhr=new XMLHttpRequest();
-xhr.open('GET','exkey?'+Date.parse(new Date()),true);
+xhr.open('GET','exkey-'+type+'?'+Date.parse(new Date()),true);
 xhr.setRequestHeader('Content-Type','x-www-form-urlencoded');
 xhr.responseType='text';
 xhr.onreadystatechange=function(e){if(xhr.readyState===4 && xhr.status===200){
@@ -45,7 +45,7 @@ window.location.hash=exkey;
 func(exkey);
 };
 function bookmarkshow(){
-exkeyget(function(exkey){
+exkeyget('bookmark',function(exkey){
 var code="javascript:(function(){var a=document.createElement('script');a.setAttribute('id','panda_js');a.setAttribute('src','//"+window.location.hostname+window.location.pathname.substring(0,window.location.pathname.lastIndexOf('/'))+"/panda.js?'+Date.parse(new Date()));"+(document.getElementById('exkey').value?"a.setAttribute('exkey','"+exkey+"');":"")+"document.body.appendChild(a);}());";
 document.getElementById('bookmarkcode').innerHTML='<a href="'+code+'"><b>[panda]</b></a><br /><input value="'+code+'" />';
 document.getElementById('intro').style.display='none';
@@ -54,7 +54,7 @@ document.getElementById('bookmark').style.display='block';
 });
 };
 function unlockershow(){
-exkeyget(function(exkey){
+exkeyget('unlocker',function(exkey){
 pend=setTimeout(function(){window.location.href=serv+'?'+exkey;},5000);
 document.getElementById('intro').style.display='none';
 document.getElementById('bookmark').style.display='none';
