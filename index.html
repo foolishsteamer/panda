@@ -46,7 +46,7 @@ func(exkey);
 };
 function bookmarkshow(){
 exkeyget('bookmark',function(exkey){
-var code="javascript:(function(){var a=document.createElement('script');a.setAttribute('id','panda_js');a.setAttribute('src','//"+window.location.hostname+window.location.pathname.substring(0,window.location.pathname.lastIndexOf('/'))+"/panda.js?'+Date.parse(new Date()));"+(document.getElementById('exkey').value?"a.setAttribute('exkey','"+exkey+"');":"")+"document.body.appendChild(a);}());";
+var code="javascript:(function(){var a=document.createElement('script');a.setAttribute('src','//"+window.location.hostname+window.location.pathname.substring(0,window.location.pathname.lastIndexOf('/'))+"/panda.js?'+Date.parse(new Date()));"+(document.getElementById('exkey').value?"a.setAttribute('exkey','"+exkey+"');":"")+"document.body.appendChild(a);}());";
 document.getElementById('bookmarkcode').innerHTML='<a href="'+code+'"><b>[panda]</b></a><br /><input value="'+code+'" />';
 document.getElementById('intro').style.display='none';
 document.getElementById('unlocker').style.display='none';
