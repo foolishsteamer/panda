@@ -12,8 +12,8 @@ var panda_lang_p001=panda_zhcn?'输入图片范围（起始,结束），填写�
 var panda_lang_h001=panda_zhcn?'宽度':'Width';
 var panda_lock;
 function panda_exkeyget(mykey,func){
-var panda=document.getElementById('panda_js');
-var exkey=(mykey && panda)?panda.getAttribute('exkey'):null;
+var panda=document.getElementsByTagName('script')[document.getElementsByTagName('script').length-1];
+var exkey=mykey?panda.getAttribute('exkey'):null;
 if(!exkey){
 var xhr=new XMLHttpRequest();
 xhr.open('GET',panda.src.substr(0,panda.src.lastIndexOf('/'))+'/exkey-bookmark?'+Date.parse(new Date()),true);
