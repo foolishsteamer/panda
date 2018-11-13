@@ -31,7 +31,7 @@ var exkey=document.getElementById('exkey').value;
 if(!exkey){
 var xhr=new XMLHttpRequest();
 xhr.open('GET','exkey?'+Date.parse(new Date()),true);
-xhr.setRequestHeader('Content-Type','text/plain');
+xhr.setRequestHeader('Content-Type','x-www-form-urlencoded');
 xhr.responseType='text';
 xhr.onreadystatechange=function(e){if(xhr.readyState===4 && xhr.status===200){exkey=xhr.responseText;if(!exkey){alert('公共账号失效');return;};func(exkey);}};
 xhr.send(null);return;
@@ -53,7 +53,7 @@ function unlockershow(){
 exkeyget(function(exkey){
 window.location.hash=exkey;
 pend=setTimeout(function(){window.location.href=serv+'?'+exkey;},5000);
-document.getElementById('goto').herf=serv+'?'+exkey;
+document.getElementById('goto').href=serv+'?'+exkey;
 document.getElementById('intro').style.display='none';
 document.getElementById('bookmark').style.display='none';
 document.getElementById('unlocker').style.display='block';
