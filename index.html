@@ -55,7 +55,6 @@ document.getElementById('bookmark').style.display='block';
 };
 function unlockershow(){
 exkeyget(function(exkey){
-window.location.hash=exkey;
 pend=setTimeout(function(){window.location.href=serv+'?'+exkey;},5000);
 document.getElementById('intro').style.display='none';
 document.getElementById('bookmark').style.display='none';
