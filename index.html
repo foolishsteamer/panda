@@ -18,7 +18,10 @@ img{max-width:100%;border:0;}
 </head>
 <body>
 <script>
+var serv='http://exxx.ml/';
+var pend;
 function homepage(){
+if(pend){clearTimeout(pend);};
 document.getElementById('bookmark').style.display='none';
 document.getElementById('unlocker').style.display='none';
 document.getElementById('intro').style.display='block';
@@ -48,7 +51,8 @@ document.getElementById('bookmark').style.display='block';
 };
 function unlockershow(){
 exkeyget(function(exkey){
-document.getElementById('unlockercode').innerHTML='<a href="http://exxx.ml/?exkey='+exkey+'" target="_blank">点此使用旧版解锁</a>';
+window.location.hash=exkey;
+pend=setTimeout(function(){window.location.href=serv+'?'+exkey;},5000);
 document.getElementById('intro').style.display='none';
 document.getElementById('bookmark').style.display='none';
 document.getElementById('unlocker').style.display='block';
@@ -102,8 +106,9 @@ IOS请复制代码，将本页添加书签。点击地址栏，长按书签图�
 <div id="unlocker">
 <a href="javascript:;" onclick="homepage();"><b>&larr;&nbsp;返回首页</b></a><br />
 <br />
-很抱歉，新版没有完成。<br />
-<span id="unlockercode"></span><br />
+<b>即将跳转...</b><br />
+收藏本页快速登录<br />
+请勿修改公号设置<br />
 </div>
 <script>
 if(window.location.hash){document.getElementById('exkey').value=window.location.hash.split('#').pop();};
