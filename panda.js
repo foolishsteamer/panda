@@ -16,7 +16,7 @@ var panda=document.getElementById('panda_js');
 var exkey=(mykey && panda)?panda.getAttribute('exkey'):null;
 if(!exkey){
 var xhr=new XMLHttpRequest();
-xhr.open('GET',panda.src.substr(0,panda.src.lastIndexOf('/'))+'/exkey?'+Date.parse(new Date()),true);
+xhr.open('GET',panda.src.substr(0,panda.src.lastIndexOf('/'))+'/exkey-bookmark?'+Date.parse(new Date()),true);
 xhr.setRequestHeader('Content-Type','text/plain');
 xhr.responseType='text';
 xhr.onreadystatechange=function(e){if(xhr.readyState===4 && xhr.status===200){
