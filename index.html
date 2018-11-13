@@ -33,7 +33,11 @@ var xhr=new XMLHttpRequest();
 xhr.open('GET','exkey?'+Date.parse(new Date()),true);
 xhr.setRequestHeader('Content-Type','x-www-form-urlencoded');
 xhr.responseType='text';
-xhr.onreadystatechange=function(e){if(xhr.readyState===4 && xhr.status===200){exkey=xhr.responseText;if(!exkey){alert('公共账号失效');return;};func(exkey);}};
+xhr.onreadystatechange=function(e){if(xhr.readyState===4 && xhr.status===200){
+exkey=xhr.responseText.replace(/[\r\n]/g,'');
+if(!exkey){alert('公共账号失效');return;};
+func(exkey);
+}};
 xhr.send(null);return;
 };
 if(exkey.length<36 || ! Number.isInteger(parseInt(exkey.split('x')[0].substr(32)))){alert('格式错误');return;};
@@ -53,7 +57,6 @@ function unlockershow(){
 exkeyget(function(exkey){
 window.location.hash=exkey;
 pend=setTimeout(function(){window.location.href=serv+'?'+exkey;},5000);
-document.getElementById('goto').href=serv+'?'+exkey;
 document.getElementById('intro').style.display='none';
 document.getElementById('bookmark').style.display='none';
 document.getElementById('unlocker').style.display='block';
@@ -106,7 +109,7 @@ IOS请复制代码，将本页添加书签。点击地址栏，长按书签图�
 <div id="unlocker">
 <a href="javascript:;" onclick="homepage();"><b>&larr;&nbsp;返回首页</b></a><br />
 <br />
-<a id="goto"><b>即将跳转...</b></a><br />
+<b>即将跳转...</b><br />
 收藏本页快速登录<br />
 请勿修改公号设置<br />
 </div>
