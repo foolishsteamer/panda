@@ -14,7 +14,7 @@ var panda_lang_p006=panda_zhcn?'切换账号':'Exkey';
 var panda_width=document.cookie.match(/panda_width=[\d]+/)?document.cookie.match(/panda_width=(\d+)/)[1]:720;
 var panda_orign=document.cookie.match(/panda_orign=true/)?true:false;
 function panda_exkeyset(){
-var setkey=prompt(panda_lang_b002,panda.getAttribute('exkey'));
+var setkey=prompt(panda_lang_b002,panda.getAttribute('exkey')?panda.getAttribute('exkey'):'');
 if(!setkey && setkey!==''){return;};
 panda_leapover(setkey);
 };
