@@ -1,106 +1,121 @@
-javascript:
-var panda_width=document.cookie.match(/panda_width=[\d]+/)?document.cookie.match(/panda_width=(\d+)/)[1]:720;
-var panda_zhcn=(navigator.language && navigator.language=='zh-CN')?true:false;
-var panda_lang_a001=panda_zhcn?'请勿重复运行':'Alerady in process';
-var panda_lang_a002=panda_zhcn?'是否进入里站':'Go to exhentai';
-var panda_lang_a003=panda_zhcn?'不正确的输入':'Illegal input';
-var panda_lang_a004=panda_zhcn?'公共账号失效':'Public account invalid';
-var panda_lang_c001=panda_zhcn?'页面读取失败，是否重试？':'Preload failed, retry?';
-var panda_lang_c002=panda_zhcn?'登录尝试失败，强制进入？（使用公共账号）':'Login failed, break-in? (use public account)';
-var panda_lang_c003=panda_zhcn?'是否加载原图？（需要下载权限且配额充足）':'Track Orign? (require download authority and enough quota)';
-var panda_lang_p001=panda_zhcn?'输入图片范围（起始,结束），填写“0”加载全部：':'Input picture range (from,to), leave "0" to load all:';
-var panda_lang_h001=panda_zhcn?'宽度':'Width';
-var panda_lock;
-function panda_exkeyget(mykey,func){
-var panda=document.getElementsByTagName('script')[document.getElementsByTagName('script').length-1];
-var exkey=mykey?panda.getAttribute('exkey'):null;
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
+<meta name="keywords" content="熊猫书签,Panda Bookmark" />
+<meta name="description" content="熊猫书签,Panda Bookmark" />
+<title>熊猫书签</title>
+<style>
+body{margin:0;padding:0;font-family:Microsoft Yahei;font-size:14px;line-height:30px;word-wrap:break-word;word-break:break-all;}
+a{color:#000;text-decoration:none;}
+#intro{margin:auto;padding:160px 20px;box-sizing:border-box;text-align:center;}
+#intro img{margin-top:8px;max-width:100%;border:0;}
+#exkey{display:block;margin:10px auto 16px auto;width:350px;max-width:100%;height:18px;}
+#bookmark,#unlocker{margin:auto;padding:60px 20px;box-sizing:border-box;width:720px;max-width:100%;display:none;}
+#bookmark img{margin-top:8px;max-width:100%;border:1px solid #000;}
+</style>
+</head>
+<body>
+<script>
+var serv='http://exxx.ml/';
+var pend;
+function homepage(){
+if(pend){clearTimeout(pend);};
+document.getElementById('bookmark').style.display='none';
+document.getElementById('unlocker').style.display='none';
+document.getElementById('intro').style.display='block';
+};
+function exkeyget(type,func){
+var exkey=document.getElementById('exkey').value;
 if(!exkey){
 var xhr=new XMLHttpRequest();
-xhr.open('GET',panda.src.substr(0,panda.src.lastIndexOf('/'))+'/exkey-bookmark?'+Date.parse(new Date()),true);
-xhr.setRequestHeader('Content-Type','text/plain');
+xhr.open('GET','exkey-'+type+'?'+Date.parse(new Date()),true);
+xhr.setRequestHeader('Content-Type','x-www-form-urlencoded');
 xhr.responseType='text';
 xhr.onreadystatechange=function(e){if(xhr.readyState===4 && xhr.status===200){
 exkey=xhr.responseText.replace(/[\r\n]/g,'');
-if(!exkey){alert(panda_lang_a004);return;};
+if(!exkey){alert('公共账号失效');return;};
 func(exkey);
 }};
 xhr.send(null);return;
 };
+if(exkey.length<36 || ! Number.isInteger(parseInt(exkey.split('x')[0].substr(32)))){alert('格式错误');return;};
+window.location.hash=exkey;
 func(exkey);
 };
-function panda_leapover(mykey){
-panda_exkeyget(mykey,function(exkey){
-document.cookie='ipb_member_id='+exkey.split('x')[0].substr(32)+';path=/;domain=.exhentai.org';
-document.cookie='ipb_pass_hash='+exkey.split('x')[0].substr(0,32)+';path=/;domain=.exhentai.org';
-document.cookie='igneous='+(exkey.split('x')[1]?exkey.split('x')[1]:'')+';path=/;domain=.exhentai.org';
-document.cookie='yay=0;path=/;domain=.exhentai.org';
-var xhr=new XMLHttpRequest();
-xhr.open('GET','https://exhentai.org',true);
-xhr.onerror=function(e){if(confirm(panda_lang_c001)){panda_leapover(true);}};
-xhr.onreadystatechange=function(e){if(xhr.readyState===4 && xhr.status===200){
-if(!xhr.responseText.match(/<link(.*?)exhentai(.*?)>/)){if(confirm(panda_lang_c002)){panda_leapover(false);};return;};
-if(window.location.href=='https://exhentai.org/favicon.ico'){window.location.href='https://exhentai.org';}
-else{window.location.reload();};
-}};
-xhr.send(null);
+function bookmarkshow(){
+exkeyget('bookmark',function(exkey){
+var code="javascript:(function(){var a=document.createElement('script');a.setAttribute('src','//"+window.location.hostname+window.location.pathname.substring(0,window.location.pathname.lastIndexOf('/'))+"/panda.js?'+Date.parse(new Date()));"+(document.getElementById('exkey').value?"a.setAttribute('exkey','"+exkey+"');":"")+"document.body.appendChild(a);}());";
+document.getElementById('bookmarkcode').innerHTML='<a href="'+code+'"><b>[panda]</b></a><br /><input value="'+code+'" />';
+document.getElementById('intro').style.display='none';
+document.getElementById('unlocker').style.display='none';
+document.getElementById('bookmark').style.display='block';
 });
 };
-function panda_loadfile(gid,numb,hash,adds,exec){
-var xhr=new XMLHttpRequest();
-xhr.open('GET','https://exhentai.org/s/'+hash+'/'+gid+'-'+numb+'?'+adds,true);
-xhr.onerror=function(e){exec(null);};
-xhr.onreadystatechange=function(e){if(xhr.readyState===4 && xhr.status===200){
-var html=xhr.responseText;
-var info={};
-info.numb=numb;
-info.hash=hash;
-info.show=html.match(/id="img" src="(.*?)"/)[1];
-info.full=html.match(/href="(https:\/\/exhentai\.org\/fullimg.php(.*?))"/)?html.match(/href="(https:\/\/exhentai\.org\/fullimg.php(.*?))"/)[1].replace(/\&amp;/g,'\&'):info.show;
-info.adds=adds+'&nl='+html.match(/onclick="return nl\(\'(.*?)\'\)"/)[1];
-exec(info);
-}};
-xhr.send(null);
-};
-function panda_loadpage(gid,token,numb,exec){
-var xhr=new XMLHttpRequest();
-xhr.open('GET','https://exhentai.org/g/'+gid+'/'+token+'/?p='+(numb-1),true);
-xhr.onerror=function(e){if(confirm(panda_lang_c001)){panda_loadpage(gid,token,numb,exec);}else{panda_lock=false;}};
-xhr.onreadystatechange=function(e){if(xhr.readyState===4 && xhr.status===200){
-var prev=document.getElementsByClassName('ths')[1].innerHTML=='Normal'?xhr.responseText.match(/<div class="gdtm"(.*?)>(.*?)https:\/\/exhentai\.org\/s\/(\w+)\/(\d+)-(\d+)(.*?)<\/div>/g):xhr.responseText.match(/<div class="gdtl"(.*?)>(.*?)https:\/\/exhentai\.org\/s\/(\w+)\/(\d+)-(\d+)(.*?)<\/div>/g);
-var info={};
-prev.forEach(function(value){var preg=value.match(/https:\/\/exhentai\.org\/s\/(\w+)\/(\d+)-(\d+)/);info[preg[3]]=preg[1];});
-exec(info);
-}};
-xhr.send(null);
-};
-function panda_listshow(){
-var panda_filenavi=document.getElementsByClassName('gpc')[0].innerHTML.match(/Showing ([\d,]+) - ([\d,]+) of ([\d,]+) images/);
-var panda_filepick=prompt(panda_lang_p001,panda_filenavi[1].replace(/,/g,'')+','+panda_filenavi[2].replace(/,/g,''));
-if(!panda_filepick){return;};
-var panda_filefrom=(!panda_filepick.split(',')[0] || panda_filepick.split(',')[0]==0)?1:parseInt(panda_filepick.split(',')[0]);
-var panda_filefinl=(!panda_filepick.split(',')[1] || panda_filepick.split(',')[1]==0)?parseInt(panda_filenavi[3].replace(/,/g,'')):parseInt(panda_filepick.split(',')[1]);
-if(!panda_filefrom || !panda_filefinl || panda_filefrom>panda_filefinl || panda_filefrom<1 || panda_filefinl>parseInt(panda_filenavi[3].replace(/,/g,''))){alert(panda_lang_a003);return;};
-var panda_fileorig=confirm(panda_lang_c003);
-var panda_pageconf=document.getElementsByClassName('ths');
-var panda_pagetote=parseInt(panda_pageconf[0].innerHTML)*(panda_pageconf[1].innerHTML=='Normal'?10:5);
-var panda_pagefrom=Math.ceil(panda_filefrom/panda_pagetote);
-var panda_pagefinl=Math.ceil(panda_filefinl/panda_pagetote);
-var panda_hashmaps={};
-panda_lock=true;
-for(var numb=panda_pagefrom;numb<=panda_pagefinl;numb++){
-panda_loadpage(gid,token,numb,function(info){
-panda_hashmaps=Object.assign(panda_hashmaps,info);
-if(Math.ceil(Object.keys(panda_hashmaps).length/panda_pagetote)==(panda_pagefinl-panda_pagefrom+1)){
-document.body.innerHTML='<div id="panda_list" style="margin:24px auto;width:'+panda_width+'px;max-width:100%;text-align:center;"><h1><a href="javascript:;" onclick="window.location.reload();" style="text-decoration:none;">Panda: '+gid+' {'+panda_filefrom+','+panda_filefinl+'} ('+panda_filenavi[3].replace(/,/g,'')+')</a></h1><div style="margin:24px auto;"><input id="panda_size" size="3" placeholder="720px" style="width:100px;"/> <input type="button" onclick="panda_width=parseInt(document.getElementById(\'panda_size\').value);document.cookie=\'panda_width=\'+panda_width+\';path=/;domain=.exhentai.org\';document.getElementById(\'panda_list\').style.width=panda_width+\'px\';" value="'+panda_lang_h001+'" /></div></div>';
-for(var numb=panda_filefrom;numb<=panda_filefinl;numb++){
-document.getElementById('panda_list').innerHTML+='<img id="panda_file_'+numb+'" src="" alt="" style="display:block;margin:4px auto;max-width:100%;min-width:100px;min-height:100px;background:#000;" onclick="panda_loadfile(gid,'+numb+',\''+panda_hashmaps[numb]+'\',this.alt,function(info){if(!info){return;};var file=document.getElementById(\'panda_file_\'+info.numb);file.src=info.'+(panda_fileorig?'full':'show')+';file.alt=info.adds;})" />';
-document.getElementById('panda_file_'+numb).click();
-};
-};
+function unlockershow(){
+exkeyget('unlocker',function(exkey){
+pend=setTimeout(function(){window.location.href=serv+'?'+exkey;},5000);
+document.getElementById('intro').style.display='none';
+document.getElementById('bookmark').style.display='none';
+document.getElementById('unlocker').style.display='block';
 });
 };
-};
-if(panda_lock){alert(panda_lang_a001);}
-else if(document.domain!='exhentai.org'){if(confirm(panda_lang_a002)){window.location.href='https://exhentai.org/favicon.ico';}}
-else if(!document.head.innerHTML.match(/<link(.*?)exhentai(.*?)>/)){panda_leapover(true);}
-else if(document.getElementById('gdt')){panda_listshow();}
+</script>
+<div id="intro">
+<img src="panda.png" alt="熊猫书签" />
+<input type="text" id="exkey" placeholder="exkey" />
+<input type="button" onclick="bookmarkshow();" value="生成书签" />
+<input type="button" onclick="unlockershow();" value="一键解锁" />
+<br /><br />
+<a href="https://openuserjs.org/scripts/loligit/%E7%86%8A%E7%8C%AB%E4%B9%A6%E7%AD%BE" target="_blank"><u>油猴脚本(Beta)</u></a>：目前只含公共账号解锁<br />
+使用前请先清空浏览器COOKIE<br />
+<a href="https://assbbs.com/thread-170.htm" target="_blank">Feedback</a>
+/
+<a href="https://github.com/loligit/panda" target="_blank">Github</a>
+/
+<a href="http://evai.pl" target="_blank">Evai.pl</a>
+</div>
+<div id="bookmark">
+<a href="javascript:;" onclick="homepage();"><b>&larr;&nbsp;返回首页</b></a><br />
+<br />
+<span id="bookmarkcode"></span><br />
+<br />
+<b>解锁 1.1</b><br />
+PC浏览器请直接将按钮“[panda]”拖入书签栏。<br />
+Android请使用<a href="https://www.mozilla.org/firefox" target="_blank"><u>Firefox</u></a>，长按按钮“[panda]”，将链接加入书签。<br />
+IOS请复制代码，将本页添加书签。点击地址栏，长按书签图标编辑，粘贴代码替换网址。<br />
+<img src="panda11.png" alt="" /><br />
+<br />
+<b>解锁 1.2</b><br />
+在任意网址（非空白页）运行书签，点击确定跳转至图标页。<br />
+<img src="panda12.png" alt="" /><br />
+<br />
+<b>解锁 1.3</b><br />
+在图标页再次运行书签即可解锁登录。<br />
+<img src="panda13.png" alt="" /><br />
+<br />
+<b>预览 2.1</b><br />
+在专辑预览页运行书签启动列表模式。<br />
+<img src="panda21.png" alt="" /><br />
+<br />
+<b>预览 2.2</b><br />
+输入图片范围（起始,结束），填写“0”加载全部。（图片过多时加载缓慢）<br />
+<img src="panda22.png" alt="" /><br />
+<br />
+<b>预览 2.3</b><br />
+是否加载原图？（需要下载权限且配额充足，更慢！）<br />
+<img src="panda23.png" alt="" /><br />
+</div>
+<div id="unlocker">
+<a href="javascript:;" onclick="homepage();"><b>&larr;&nbsp;返回首页</b></a><br />
+<br />
+<b>即将跳转...</b><br />
+收藏本页快速登录<br />
+请勿修改公号设置<br />
+</div>
+<script>
+if(window.location.hash){document.getElementById('exkey').value=window.location.hash.split('#').pop();};
+</script>
+</body>
+</html>
