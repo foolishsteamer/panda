@@ -104,4 +104,3 @@ if(panda_lock){alert(panda_lang_a001);}
 else if(document.domain!='exhentai.org'){if(confirm(panda_lang_a002)){window.location.href='https://exhentai.org/favicon.ico';}}
 else if(!document.head.innerHTML.match(/<link(.*?)exhentai(.*?)>/)){panda_leapover(true);}
 else if(document.getElementById('gdt')){panda_listshow();}
-else{alert('error');};
