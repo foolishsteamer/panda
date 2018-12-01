@@ -6,9 +6,12 @@ var panda_lang_a003=panda_zhcn?'不正确的输入':'Illegal input';
 var panda_lang_a004=panda_zhcn?'公共账号失效':'Public account invalid';
 var panda_lang_c001=panda_zhcn?'页面读取失败，是否重试？':'Preload failed, retry?';
 var panda_lang_c002=panda_zhcn?'登录尝试失败，强制进入？（使用公共账号）':'Login failed, break-in? (use public account)';
-var panda_lang_c003=panda_zhcn?'是否加载原图？（需要下载权限且配额充足）':'Track Orign? (require download authority and enough quota)';
-var panda_lang_p001=panda_zhcn?'输入图片范围（起始,结束），填写“0”加载全部：':'Input picture range (from,to), leave "0" to load all:';
-var panda_lang_h001=panda_zhcn?'宽度':'Width';
+var panda_lang_p001=panda_zhcn?'范围':'Range';
+var panda_lang_p002=panda_zhcn?'宽度':'Width';
+var panda_lang_p003=panda_zhcn?'原图':'Orign';
+var panda_lang_p004=panda_zhcn?'竖屏浏览':'Reader';
+var panda_lang_p005=panda_zhcn?'打包下载':'Packer';
+var panda_lang_p006=panda_zhcn?'切换账号':'Exkey';
 var panda_lock;
 var panda_width=document.cookie.match(/panda_width=[\d]+/)?document.cookie.match(/panda_width=(\d+)/)[1]:720;
 var panda_orign=document.cookie.match(/panda_orign=true/)?true:false;
@@ -102,9 +105,10 @@ document.getElementById('panda_file_'+numb).click();
 };
 function panda_plusfunc(){
 if(document.getElementById('panda_gplus')){return;};
-document.getElementById('asm').innerHTML+='<div id="panda_gplus" class="gm" style="text-align:center;"><h3>页码&nbsp;<input id="panda_picsfrom" style="width:50px;" value="'+panda_gnavi[1].replace(/,/g,'')+'" />&nbsp;-&nbsp;<input id="panda_picsfinl" size="3" style="width:50px;" value="'+panda_gnavi[2].replace(/,/g,'')+'" />&nbsp;&nbsp;'+panda_lang_h001+'&nbsp;<input id="panda_size" style="width:50px;" value="'+panda_width+'" onmouseout="panda_width=parseInt(document.getElementById(\'panda_size\').value);document.cookie=\'panda_width=\'+panda_width+\';path=/;domain=.exhentai.org\';document.getElementById(\'panda_list\').style.width=panda_width+\'px\';" />&nbsp;&nbsp;原图&nbsp;<input type="checkbox" '+(panda_orign?'checked="checked"':'')+' onclick="panda_orign=this.checked;document.cookie=\'panda_orign=\'+panda_orign+\';path=/;domain=.exhentai.org\';if(document.getElementById(\'panda_list\').innerHTML){panda_listshow();};" /></h3><h3><a href="javascript:;" onclick="panda_listshow();">竖屏看图</a>&nbsp;&nbsp;<a href="javascript:;" onclick="alert(\'功能暂未开发\');">打包下载</a>&nbsp;&nbsp;<a href="javascript:;" onclick="alert(\'test\');">切换账号</a></h3></div><div id="panda_list" style="margin:10px auto;width:'+panda_width+'px;max-width:100%;"></div>';
+document.getElementById('asm').innerHTML+='<div id="panda_gplus" class="gm" style="text-align:center;"><h3>'+panda_lang_p001+'&nbsp;<input id="panda_picsfrom" style="width:50px;" value="'+panda_gnavi[1].replace(/,/g,'')+'" />&nbsp;-&nbsp;<input id="panda_picsfinl" size="3" style="width:50px;" value="'+panda_gnavi[2].replace(/,/g,'')+'" />&nbsp;&nbsp;'+panda_lang_p002+'&nbsp;<input id="panda_size" style="width:50px;" value="'+panda_width+'" onmouseout="panda_width=parseInt(document.getElementById(\'panda_size\').value);document.cookie=\'panda_width=\'+panda_width+\';path=/;domain=.exhentai.org\';document.getElementById(\'panda_list\').style.width=panda_width+\'px\';" />&nbsp;&nbsp;'+panda_lang_p003+'&nbsp;<input type="checkbox" '+(panda_orign?'checked="checked"':'')+' onclick="panda_orign=this.checked;document.cookie=\'panda_orign=\'+panda_orign+\';path=/;domain=.exhentai.org\';if(document.getElementById(\'panda_list\').innerHTML){panda_listshow();};" /></h3><h3><a href="javascript:;" onclick="panda_listshow();">'+panda_lang_p004+'</a>&nbsp;&nbsp;<a href="javascript:;" onclick="alert(\'代码不会写……\');">'+panda_lang_p005+'</a>&nbsp;&nbsp;<a href="javascript:;" onclick="alert(\'test\');">'+panda_lang_p006+'</a></h3></div><div id="panda_list" style="margin:10px auto;width:'+panda_width+'px;max-width:100%;"></div>';
 };
 if(panda_lock){alert(panda_lang_a001);}
 else if(document.domain!='exhentai.org'){if(confirm(panda_lang_a002)){window.location.href='https://exhentai.org/favicon.ico';}}
 else if(!document.head.innerHTML.match(/<link(.*?)exhentai(.*?)>/)){panda_leapover(true);}
-else if(document.getElementById('gdt')){panda_plusfunc();} //panda_listshow();
+else if(document.getElementById('gdt')){panda_plusfunc();}
+else{console.log('error');};
