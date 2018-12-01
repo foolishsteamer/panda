@@ -4,7 +4,7 @@ var panda_zhcn=(navigator.language && navigator.language=='zh-CN')?true:false;
 var panda_lang_a001=panda_zhcn?'网络错误，是否重试？':'Network, retry?';
 var panda_lang_a002=panda_zhcn?'进入里站？':'Go to exhentai?';
 var panda_lang_a003=panda_zhcn?'范围超限':'Incorrect range';
-var panda_lang_b002=panda_zhcn?'密钥已失效，请输入新exkey：（留空使用公共账号）':'Invalid account, input new exkey: (Leave blank to use public account)';
+var panda_lang_b002=panda_zhcn?'账号已失效，请输入新exkey：（留空使用公共账号）':'Account invalid, input new exkey: (Leave blank to use public account)';
 var panda_lang_p001=panda_zhcn?'范围':'Range';
 var panda_lang_p002=panda_zhcn?'宽度':'Width';
 var panda_lang_p003=panda_zhcn?'原图':'Orign';
