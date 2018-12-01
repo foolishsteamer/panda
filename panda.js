@@ -2,7 +2,7 @@ javascript:
 var panda_width=document.cookie.match(/panda_width=[\d]+/)?document.cookie.match(/panda_width=(\d+)/)[1]:720;
 var panda_zhcn=(navigator.language && navigator.language=='zh-CN')?true:false;
 var panda_lang_a001=panda_zhcn?'请勿重复运行':'Alerady in process';
-var panda_lang_a002=panda_zhcn?'本页无法运行，是否跳转？':'Incorrect usage, go to exhentai?';
+var panda_lang_a002=panda_zhcn?'是否进入里站':'Go to exhentai';
 var panda_lang_a003=panda_zhcn?'不正确的输入':'Illegal input';
 var panda_lang_a004=panda_zhcn?'公共账号失效':'Public account invalid';
 var panda_lang_c001=panda_zhcn?'页面读取失败，是否重试？':'Preload failed, retry?';
