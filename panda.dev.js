@@ -1,10 +1,10 @@
 javascript:
+var panda=document.getElementsByTagName('script')[document.getElementsByTagName('script').length-1];
 var panda_zhcn=(navigator.language && navigator.language=='zh-CN')?true:false;
-var panda_lang_a001=panda_zhcn?'是否进入里站':'Go to exhentai';
-var panda_lang_a004=panda_zhcn?'公共账号失效':'Public account invalid';
-var panda_lang_b001=panda_zhcn?'页面读取失败，是否重试？':'Preload failed, retry?';
-var panda_lang_b002=panda_zhcn?'登录尝试失败，强制进入？（使用公共账号）':'Login failed, break-in? (use public account)';
-var panda_lang_c001=panda_zhcn?'不正确的输入':'Illegal input';
+var panda_lang_a001=panda_zhcn?'网络错误，是否重试？':'Network, retry?';
+var panda_lang_a002=panda_zhcn?'进入里站？':'Go to exhentai?';
+var panda_lang_a003=panda_zhcn?'范围超限':'Incorrect range';
+var panda_lang_b002=panda_zhcn?'密钥已失效，请输入新exkey：（留空使用公共账号）':'Invalid account, input new exkey: (Leave blank to use public account)';
 var panda_lang_p001=panda_zhcn?'范围':'Range';
 var panda_lang_p002=panda_zhcn?'宽度':'Width';
 var panda_lang_p003=panda_zhcn?'原图':'Orign';
@@ -13,36 +13,37 @@ var panda_lang_p005=panda_zhcn?'打包下载':'Packer';
 var panda_lang_p006=panda_zhcn?'切换账号':'Exkey';
 var panda_width=document.cookie.match(/panda_width=[\d]+/)?document.cookie.match(/panda_width=(\d+)/)[1]:720;
 var panda_orign=document.cookie.match(/panda_orign=true/)?true:false;
-function panda_exkeyget(mykey,func){
-var panda=document.getElementsByTagName('script')[document.getElementsByTagName('script').length-1];
-var exkey=mykey?panda.getAttribute('exkey'):null;
-if(!exkey){
+function panda_exkeyset(){
+var setkey=prompt(panda_lang_b002,panda.getAttribute('exkey'));
+if(!setkey && setkey!==''){return;};
+panda_leapover(setkey);
+};
+function panda_exkeyget(setkey,func){
+if(setkey){func(setkey);return;}
 var xhr=new XMLHttpRequest();
 xhr.open('GET',panda.src.substr(0,panda.src.lastIndexOf('/'))+'/exkey-bookmark?'+Date.parse(new Date()),true);
 xhr.setRequestHeader('Content-Type','text/plain');
 xhr.responseType='text';
 xhr.onreadystatechange=function(e){if(xhr.readyState===4 && xhr.status===200){
-exkey=xhr.responseText.replace(/[\r\n]/g,'');
-if(!exkey){alert(panda_lang_a004);return;};
-func(exkey);
+getkey=xhr.responseText.replace(/[\r\n]/g,'');
+if(!getkey){panda_exkeyset();return;};
+func(getkey);
 }};
-xhr.send(null);return;
+xhr.send(null);
 };
-func(exkey);
-};
-function panda_leapover(mykey){
-panda_exkeyget(mykey,function(exkey){
-document.cookie='ipb_member_id='+exkey.split('x')[0].substr(32)+';path=/;domain=.exhentai.org';
-document.cookie='ipb_pass_hash='+exkey.split('x')[0].substr(0,32)+';path=/;domain=.exhentai.org';
-document.cookie='igneous='+(exkey.split('x')[1]?exkey.split('x')[1]:'')+';path=/;domain=.exhentai.org';
+function panda_leapover(setkey){
+panda_exkeyget(setkey,function(getkey){
+document.cookie='ipb_member_id='+getkey.split('x')[0].substr(32)+';path=/;domain=.exhentai.org';
+document.cookie='ipb_pass_hash='+getkey.split('x')[0].substr(0,32)+';path=/;domain=.exhentai.org';
+document.cookie='igneous='+(getkey.split('x')[1]?getkey.split('x')[1]:'')+';path=/;domain=.exhentai.org';
 document.cookie='yay=0;path=/;domain=.exhentai.org';
 var xhr=new XMLHttpRequest();
 xhr.open('GET','https://exhentai.org',true);
-xhr.onerror=function(e){if(confirm(panda_lang_b001)){panda_leapover(true);}};
+xhr.onerror=function(e){if(confirm(panda_lang_a001)){panda_leapover(getkey);};};
 xhr.onreadystatechange=function(e){if(xhr.readyState===4 && xhr.status===200){
-if(!xhr.responseText.match(/<link(.*?)exhentai(.*?)>/)){if(confirm(panda_lang_b002)){panda_leapover(false);};return;};
-if(window.location.href=='https://exhentai.org/favicon.ico'){window.location.href='https://exhentai.org';}
-else{window.location.reload();};
+if(!xhr.responseText.match(/<link(.*?)exhentai(.*?)>/)){panda_exkeyset();return;};
+if(window.location.href=='https://exhentai.org/favicon.ico'){window.location.href='https://exhentai.org';return;}
+window.location.reload();
 }};
 xhr.send(null);
 });
@@ -50,7 +51,7 @@ xhr.send(null);
 function panda_loadpage(gid,token,numb,exec){
 var xhr=new XMLHttpRequest();
 xhr.open('GET','https://exhentai.org/g/'+gid+'/'+token+'/?p='+(numb-1),true);
-xhr.onerror=function(e){if(confirm(panda_lang_b001)){panda_loadpage(gid,token,numb,exec);}else{panda_lock=false;}};
+xhr.onerror=function(e){if(confirm(panda_lang_a001)){panda_loadpage(gid,token,numb,exec);}else{panda_lock=false;}};
 xhr.onreadystatechange=function(e){if(xhr.readyState===4 && xhr.status===200){
 var prev=document.getElementsByClassName('ths')[1].innerHTML=='Normal'?xhr.responseText.match(/<div class="gdtm"(.*?)>(.*?)https:\/\/exhentai\.org\/s\/(\w+)\/(\d+)-(\d+)(.*?)<\/div>/g):xhr.responseText.match(/<div class="gdtl"(.*?)>(.*?)https:\/\/exhentai\.org\/s\/(\w+)\/(\d+)-(\d+)(.*?)<\/div>/g);
 var info={};
@@ -81,7 +82,7 @@ var panda_showfinl=document.getElementById('panda_showfinl').value;
 var panda_showfull=document.getElementById('panda_showfull').title;
 var panda_filefrom=(!panda_showfrom || panda_showfrom==0)?1:parseInt(panda_showfrom);
 var panda_filefinl=(!panda_showfinl || panda_showfinl==0)?parseInt(panda_showfull.replace(/,/g,'')):parseInt(panda_showfinl);
-if(!panda_filefrom || !panda_filefinl || panda_filefrom>panda_filefinl || panda_filefrom<1 || panda_filefinl>parseInt(panda_showfull.replace(/,/g,''))){alert(panda_lang_c001);return;};
+if(!panda_filefrom || !panda_filefinl || panda_filefrom>panda_filefinl || panda_filefrom<1 || panda_filefinl>parseInt(panda_showfull.replace(/,/g,''))){alert(panda_lang_a003);return;};
 var panda_pageconf=document.getElementsByClassName('ths');
 var panda_pagetote=parseInt(panda_pageconf[0].innerHTML)*(panda_pageconf[1].innerHTML=='Normal'?10:5);
 var panda_pagefrom=Math.ceil(panda_filefrom/panda_pagetote);
@@ -102,10 +103,10 @@ document.getElementById('panda_file_'+numb).click();
 };
 function panda_plusfunc(){
 var panda_gnavi=document.getElementsByClassName('gpc')[0].innerHTML.match(/Showing ([\d,]+) - ([\d,]+) of ([\d,]+) images/);
-document.getElementById('asm').innerHTML+='<div id="panda_gplus" class="gm" style="text-align:center;"><h3>'+panda_lang_p001+'&nbsp;<input id="panda_showfrom" style="width:50px;" value="'+panda_gnavi[1].replace(/,/g,'')+'" />&nbsp;<span id="panda_showfull" title="'+panda_gnavi[3].replace(/,/g,'')+'">-</span>&nbsp;<input id="panda_showfinl" size="3" style="width:50px;" value="'+panda_gnavi[2].replace(/,/g,'')+'" />&nbsp;&nbsp;'+panda_lang_p002+'&nbsp;<input id="panda_size" style="width:50px;" value="'+panda_width+'" onmouseout="panda_width=parseInt(document.getElementById(\'panda_size\').value);document.cookie=\'panda_width=\'+panda_width+\';path=/;domain=.exhentai.org\';document.getElementById(\'panda_list\').style.width=panda_width+\'px\';" />&nbsp;&nbsp;'+panda_lang_p003+'&nbsp;<input type="checkbox" '+(panda_orign?'checked="checked"':'')+' onclick="panda_orign=this.checked;document.cookie=\'panda_orign=\'+panda_orign+\';path=/;domain=.exhentai.org\';if(document.getElementById(\'panda_list\').innerHTML){panda_showlist();};" /></h3><h3><a href="javascript:;" onclick="panda_showlist();">'+panda_lang_p004+'</a>&nbsp;&nbsp;<a href="javascript:;" onclick="alert(\'代码不会写……\');">'+panda_lang_p005+'</a>&nbsp;&nbsp;<a href="javascript:;" onclick="alert(\'test\');">'+panda_lang_p006+'</a></h3></div><div id="panda_list" style="margin:10px auto;width:'+panda_width+'px;max-width:100%;"></div>';
+document.getElementById('asm').innerHTML+='<div id="panda_gplus" class="gm" style="text-align:center;"><h3>'+panda_lang_p001+'&nbsp;<input id="panda_showfrom" style="width:50px;" value="'+panda_gnavi[1].replace(/,/g,'')+'" />&nbsp;<span id="panda_showfull" title="'+panda_gnavi[3].replace(/,/g,'')+'">-</span>&nbsp;<input id="panda_showfinl" size="3" style="width:50px;" value="'+panda_gnavi[2].replace(/,/g,'')+'" />&nbsp;&nbsp;'+panda_lang_p002+'&nbsp;<input id="panda_size" style="width:50px;" value="'+panda_width+'" onmouseout="panda_width=parseInt(document.getElementById(\'panda_size\').value);document.cookie=\'panda_width=\'+panda_width+\';path=/;domain=.exhentai.org\';document.getElementById(\'panda_list\').style.width=panda_width+\'px\';" />&nbsp;&nbsp;'+panda_lang_p003+'&nbsp;<input type="checkbox" '+(panda_orign?'checked="checked"':'')+' onclick="panda_orign=this.checked;document.cookie=\'panda_orign=\'+panda_orign+\';path=/;domain=.exhentai.org\';if(document.getElementById(\'panda_list\').innerHTML){panda_showlist();};" /></h3><h3><a href="javascript:;" onclick="panda_showlist();">'+panda_lang_p004+'</a>&nbsp;&nbsp;<a href="javascript:;" onclick="alert(\'代码不会写……\r\nNo can write code\');">'+panda_lang_p005+'</a>&nbsp;&nbsp;<a href="javascript:;" onclick="panda_exkeyset();">'+panda_lang_p006+'</a></h3></div><div id="panda_list" style="margin:10px auto;width:'+panda_width+'px;max-width:100%;"></div>';
 };
 if(document.getElementById('panda_gplus')){console.log('exist');}
-else if(document.domain!='exhentai.org'){if(confirm(panda_lang_a001)){window.location.href='https://exhentai.org/favicon.ico';}}
-else if(!document.head.innerHTML.match(/<link(.*?)exhentai(.*?)>/)){panda_leapover(true);}
+else if(document.domain!='exhentai.org'){if(confirm(panda_lang_a002)){window.location.href='https://exhentai.org/favicon.ico';}}
+else if(!document.head.innerHTML.match(/<link(.*?)exhentai(.*?)>/)){panda_leapover(panda.getAttribute('exkey'));}
 else if(document.getElementById('gdt')){panda_plusfunc();}
 else{console.log('error');};
