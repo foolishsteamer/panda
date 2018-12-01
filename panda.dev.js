@@ -10,7 +10,7 @@ var panda_lang_p002=panda_zhcn?'宽度':'Width';
 var panda_lang_p003=panda_zhcn?'原图':'Orign';
 var panda_lang_p004=panda_zhcn?'竖屏浏览':'Reader';
 var panda_lang_p005=panda_zhcn?'打包下载':'Packer';
-var panda_lang_p006=panda_zhcn?'切换账号':'Exkey';
+var panda_lang_p006=panda_zhcn?'切换账号':'Altkey';
 var panda_width=document.cookie.match(/panda_width=[\d]+/)?document.cookie.match(/panda_width=(\d+)/)[1]:720;
 var panda_orign=document.cookie.match(/panda_orign=true/)?true:false;
 function panda_exkeyset(){
