@@ -101,7 +101,7 @@ document.getElementById('panda_file_'+numb).click();
 };
 };
 function panda_plusfunc(){
-document.getElementById('panda_list').innerHTML+='<div class="gm"><center><h2>PANDA.JS</h2><h2>P<input />&nbsp;-&nbsp;P<input /></h2><h2><a href="javascript:;" onclick="alert(\'test\');">[竖屏看图]</a>&nbsp;<a href="javascript:;" onclick="alert(\'功能暂未开发\');">[打包下载]</a>&nbsp;<a href="javascript:;" onclick="alert(\'test\');">[切换账号]</a></h2></center></div>';
+document.getElementById('nb').innerHTML+='<div class="gm"><center><h2>PANDA.JS</h2><h2>P<input />&nbsp;-&nbsp;P<input /></h2><h2><a href="javascript:;" onclick="alert(\'test\');">[竖屏看图]</a>&nbsp;<a href="javascript:;" onclick="alert(\'功能暂未开发\');">[打包下载]</a>&nbsp;<a href="javascript:;" onclick="alert(\'test\');">[切换账号]</a></h2></center></div>';
 };
 if(panda_lock){alert(panda_lang_a001);}
 else if(document.domain!='exhentai.org'){if(confirm(panda_lang_a002)){window.location.href='https://exhentai.org/favicon.ico';}}
