@@ -11,7 +11,7 @@ var panda_lang_p001=panda_zhcn?'输入图片范围（起始,结束），填写�
 var panda_lang_h001=panda_zhcn?'宽度':'Width';
 var panda_lock;
 var panda_width=document.cookie.match(/panda_width=[\d]+/)?document.cookie.match(/panda_width=(\d+)/)[1]:720;
-var panda_orign=document.cookie.match(/panda_orign=(true|false)/)?document.cookie.match(/panda_orign=(true|false)/)[1]:false;
+var panda_orign=document.cookie.match(/panda_orign=true/)?true:false;
 console.log(panda_orign);
 var panda_gnavi=document.getElementsByClassName('gpc')[0].innerHTML.match(/Showing ([\d,]+) - ([\d,]+) of ([\d,]+) images/);
 function panda_exkeyget(mykey,func){
