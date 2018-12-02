@@ -13,7 +13,6 @@ var panda_lang_p005=panda_zhcn?'打包下载':'Packer';
 var panda_lang_p006=panda_zhcn?'切换账号':'Altkey';
 var panda_width=document.cookie.match(/panda_width=[\d]+/)?document.cookie.match(/panda_width=(\d+)/)[1]:720;
 var panda_orign=document.cookie.match(/panda_orign=true/)?true:false;
-var panda_broke=document.cookie.match(/panda_broke=1/)?true:false;
 function panda_exkeyset(){
 var setkey=prompt(panda_lang_b002,panda.getAttribute('exkey')?panda.getAttribute('exkey'):'');
 if(!setkey && setkey!==''){return;};
@@ -34,7 +33,6 @@ xhr.send(null);
 };
 function panda_leapover(setkey){
 panda_exkeyget(setkey,function(getkey){
-document.cookie='panda_broke=0;path=/;domain=.exhentai.org';
 document.cookie='ipb_member_id='+getkey.split('x')[0].substr(32)+';path=/;domain=.exhentai.org';
 document.cookie='ipb_pass_hash='+getkey.split('x')[0].substr(0,32)+';path=/;domain=.exhentai.org';
 document.cookie='igneous='+(getkey.split('x')[1]?getkey.split('x')[1]:'')+';path=/;domain=.exhentai.org';
@@ -44,7 +42,6 @@ xhr.open('GET','https://exhentai.org',true);
 xhr.onerror=function(e){if(confirm(panda_lang_a001)){panda_leapover(getkey);};};
 xhr.onreadystatechange=function(e){if(xhr.readyState===4 && xhr.status===200){
 if(!xhr.responseText.match(/<link(.*?)exhentai(.*?)>/)){panda_exkeyset();return;};
-document.cookie='panda_broke=1;path=/;domain=.exhentai.org';
 if(window.location.href=='https://exhentai.org/favicon.ico'){window.location.href='https://exhentai.org';return;}
 window.location.reload();
 }};
@@ -111,5 +108,5 @@ document.getElementById('asm').innerHTML+='<div id="panda_gplus" class="gm" styl
 if(document.getElementById('panda_gplus')){console.log('exist');}
 else if(document.domain!='exhentai.org'){if(confirm(panda_lang_a002)){window.location.href='https://exhentai.org/favicon.ico';}}
 else if(document.getElementById('gdt')){panda_plusfunc();}
-else if(window.location.href=='https://exhentai.org/favicon.ico' || (!panda_broke && !document.head.innerHTML.match(/<link(.*?)exhentai(.*?)>/))){panda_leapover(panda.getAttribute('exkey'));}
+else if(window.location.href=='https://exhentai.org/favicon.ico' || document.cookie.match(/yay=louder/)){panda_leapover(panda.getAttribute('exkey'));}
 else{console.log('nouse');};
