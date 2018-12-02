@@ -7,25 +7,16 @@
 <meta name="description" content="熊猫书签,Panda Bookmark" />
 <title>熊猫书签</title>
 <style>
-body{margin:0;padding:0;font-family:Microsoft Yahei;font-size:14px;line-height:30px;word-wrap:break-word;word-break:break-all;}
+body{margin:10px 20px;padding:0;font-family:Microsoft Yahei;font-size:14px;line-height:30px;word-wrap:break-word;word-break:break-all;}
+*{max-width:100%;}
 a{color:#000;text-decoration:none;}
-#intro{margin:auto;padding:160px 20px;box-sizing:border-box;text-align:center;}
-#intro img{margin-top:8px;max-width:100%;border:0;}
-#exkey{display:block;margin:10px auto 16px auto;width:350px;max-width:100%;height:18px;}
-#bookmark,#unlocker{margin:auto;padding:60px 20px;box-sizing:border-box;width:720px;max-width:100%;display:none;}
-#bookmark img{margin-top:8px;max-width:100%;border:1px solid #000;}
+img{margin-top:8px;border:0;}
+#exkey{margin:8px 0;width:350px;max-width:100%;height:18px;}
 </style>
 </head>
 <body>
 <script>
 var serv='http://exxx.ml/';
-var pend;
-function homepage(){
-if(pend){clearTimeout(pend);};
-document.getElementById('bookmark').style.display='none';
-document.getElementById('unlocker').style.display='none';
-document.getElementById('intro').style.display='block';
-};
 function exkeyget(type,func){
 var exkey=document.getElementById('exkey').value;
 if(!exkey){
@@ -35,12 +26,12 @@ xhr.setRequestHeader('Content-Type','x-www-form-urlencoded');
 xhr.responseType='text';
 xhr.onreadystatechange=function(e){if(xhr.readyState===4 && xhr.status===200){
 exkey=xhr.responseText.replace(/[\r\n]/g,'');
-if(!exkey){alert('公共账号失效');return;};
+if(!exkey){alert('公用账号失效');return;};
 func(exkey);
 }};
 xhr.send(null);return;
 };
-if(exkey.length<36 || ! Number.isInteger(parseInt(exkey.split('x')[0].substr(32)))){alert('格式错误');return;};
+if(exkey.length<36 || ! Number.isInteger(parseInt(exkey.split('x')[0].substr(32)))){alert('exkey格式错误');return;};
 window.location.hash=exkey;
 func(exkey);
 };
@@ -48,72 +39,126 @@ function bookmarkshow(){
 exkeyget('bookmark',function(exkey){
 var code="javascript:(function(){var a=document.createElement('script');a.setAttribute('src','//"+window.location.hostname+window.location.pathname.substring(0,window.location.pathname.lastIndexOf('/'))+"/panda.js?'+Date.parse(new Date()));"+(document.getElementById('exkey').value?"a.setAttribute('exkey','"+exkey+"');":"")+"document.body.appendChild(a);}());";
 document.getElementById('bookmarkcode').innerHTML='<a href="'+code+'"><b>[panda]</b></a><br /><input value="'+code+'" />';
-document.getElementById('intro').style.display='none';
-document.getElementById('unlocker').style.display='none';
 document.getElementById('bookmark').style.display='block';
+});
+};
+function tpmonkeyshow(){
+exkeyget('bookmark',function(exkey){
+if(document.getElementById('exkey').value){alert('对不起，油猴脚本私有账号功能暂未实现');return;};
+document.getElementById('tpmonkey').style.display='block';
 });
 };
 function unlockershow(){
 exkeyget('unlocker',function(exkey){
-pend=setTimeout(function(){window.location.href=serv+'?'+exkey;},5000);
-document.getElementById('intro').style.display='none';
-document.getElementById('bookmark').style.display='none';
-document.getElementById('unlocker').style.display='block';
+window.location.href=serv+'#'+exkey;
 });
 };
 </script>
-<div id="intro">
-<img src="panda.png" alt="熊猫书签" />
-<input type="text" id="exkey" placeholder="exkey" />
-<input type="button" onclick="bookmarkshow();" value="生成书签" />
-<input type="button" onclick="unlockershow();" value="一键解锁" />
-<br /><br />
-<a href="https://openuserjs.org/scripts/loligit/%E7%86%8A%E7%8C%AB%E4%B9%A6%E7%AD%BE" target="_blank"><u>油猴脚本(Beta)</u></a>：目前只含公共账号解锁<br />
-使用前请先清空浏览器COOKIE<br />
-<a href="https://assbbs.com/thread-170.htm" target="_blank">Feedback</a>
-/
-<a href="https://github.com/loligit/panda" target="_blank">Github</a>
-/
-<a href="http://evai.pl" target="_blank">Evai.pl</a>
-</div>
-<div id="bookmark">
-<a href="javascript:;" onclick="homepage();"><b>&larr;&nbsp;返回首页</b></a><br />
+<img src="panda.png" alt="熊猫书签" /><br />
+感谢使用熊猫书签，这篇向导会很长，请您耐心看完。<br />
+<a href="javascript:;" onclick="window.scrollTo(0,document.getElementById('apply').offsetTop-14);"><b>点击这里跳过说明，前往应用创建部分！</b></a><br />
 <br />
+<b>【名词解释】</b><br />
+废号：因为各种原因永远无法进入里站的账号，大部分中国大陆用户注册到的都是废号。<br />
+正常：拥有里站权限，可以通过表站正常登录的账号。有些正常账号在中国大陆也无法登录，但是在国外可以登录。<br />
+黑户：原先正常的账号被封禁/改密，但备份了之前的里站COOKIE（exkey），可以用书签登录里站，但无法设置和下载原图。<br />
+公号：COOKIE（exkey）谁都可见的公用账号，这类账号可能随时被封禁，如果不是黑户则共享设置。<br />
+私号：就是您自己的私有账号，没有别人可以用，强烈建议注册。<br />
+<br />
+<b>【账号注册】</b><br />
+如果您连V:P!И是什么都不知道，或者根本懒得注册，可以跳过本节。<br />
+注册地址：<a href="https://forums.e-hentai.org/?act=Reg" target="_blank">https://forums.e-hentai.org/?act=Reg</a><br />
+上面这个地址中国大陆的朋友应该无法访问，解决方法有以下几种：<br />
+1.从淘宝一类地方买个账号，然后跳过本节，注意防骗。<br />
+2.购买或搭建<b>欧美私人V:P!И</b>后访问，注意一定要私人IP，不能一堆人用一个的那种。<br />
+注册过程就不说了，就那么几行英文。注册确认键上面应该有个验证码，如果看不到请更换V:P!И。<br />
+试验得出的几种注册失败原因：（不一定完全准确，因为规则E站管理员可以随时修改）<br />
+1.使用<b>公共V:P!И</b>注册的账户，无法获得里区权限。就是之前有人用这个IP注册过了，E站数据库有记录，如果再有人注册，就把两个账号都标记废号。所以强烈推荐自己购买VPS搭建私人V:P!И。<br />
+2.使用<b>中国、日本等地区IP</b>注册的账户，无法获得里区权限。所以即便购买V:P!И也一定要选好位置，最好用欧美地区的服务器。<br />
+3.使用<b>中文、日文等语言浏览器</b>注册的账户，无法获得里区权限。所以请先把浏览器语言改成英文再注册。<br .>
+4.使用<b>新浪、搜狐、163、QQ等邮箱</b>注册的账户，无法获得里区权限。请使用Outlook或iCloud邮箱。<br />
+注册完成等待一周（以前是两周现在缩短了）左右时间，账号应该就获得里区权限了。<br />
+这时请用和<b>注册时相同的网络环境</b>，先清空浏览器COOKIE，然后登录论坛，最后访问exhentai.org。<br />
+如果还是出现熊猫就说明账号没有里区权限，可以尝试再等一周或换个欧美V:P!И登录，如果还不行那就是凉了。<br />
+<br />
+<b>【提取密钥】</b><br />
+如果您没有完成上节的私有账号注册及登录，或者连F12都不会按，请跳过本节。<br />
+exkey就是您在里站的COOKIE序列，使用熊猫书签可以解析exkey，实现即时不用V:P!И也能登录私有账号。<br />
+示例格式：（这只是个范例，不是可用的exkey）<br />
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa123456x1e2d3c<br />
+前32位（aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa）是<b>ipb_pass_hash</b>，也就是重组后的密码。<br />
+后几位数字（123456）是<b>ipb_member_id</b>，也就是的用户编号。<br />
+x是没有含义但必须要有的<b>分隔符</b>。<br />
+x之后（1e2d3c）是<b>igneous</b>，是一个非常有用的校验码。<br />
+使用电脑浏览器，<b>按上节教程正常登录里站</b>。按下键盘F12，根据您的浏览器依次找到：<br />
+[Edge] Debug-Cookie-exhentai.org<br />
+[Chrome] Application-Cookies-exhentai.org<br />
+[Firefox] Storage-Cookies-exhentai.org<br />
+应该可以看到一个类似于列表的地方，复制<b>ipb_pass_hash</b>、<b>ipb_member_id</b>、<b>igneous</b>这三个变量的值。<br />
+然后按照上面的格式规范组合成exkey，把这串密钥保存好，以后就可以用了。<br />
+<br />
+<b>【常见错误】</b><br />
+如果您毫无网络基础知识，或者能正常登录E站，请跳过本节。<br />
+1.访问注册/登录地址，提示网络链接被重置（网络封锁）<br />
+您所在的国家或网络运营商屏蔽了E绅士表站，类似于<b>中国的G:F!W</b>。请修改DNS/HOSTS，或挂载<b>欧美地区</b>的<b>私人V:P!И</b>。请注意，如果您在<b>中国、日本等地区</b>，即便您能够顺利注册地址，该账号也<b>永远无法获得</b>里区权限，具体规则请见<b>注册并获取里区权限</b>。<br />
+2.访问EX里站（包括用书签），提示网络链接被重置（网络封锁）<br />
+首先可能是EX里站没有写入COOKIE（ipb_pass_hash+ipb_member_id+igneous），跳转到了被墙的表站检测接口，造成无法访问的假象，请按照书签说明正确访问。此外可能您所在的国家或网络运营商屏蔽了E绅士里站，类似于<b>中国移动墙中墙</b>。请修改DNS/HOSTS，或挂载<b>欧美地区</b>的<b>私人V:P!И</b>，亦可考虑更换网络运营商。<br />
+3.访问EX里站（包括用书签），出现白屏（主机封锁）<br />
+您所在的国家或网络运营商被EH火墙拦截，例如日本（规避版权问题）、加拿大（禁止成人漫画）以及高峰时期屏蔽整个亚洲地区。请挂载<b>欧美地区</b>的<b>私人V:P!И</b>，或<b>前往欧美国家</b>访问。<br />
+4.访问EX里站（包括用书签），出现熊猫（账户封锁）<br />
+您的账号没有获得里站权限。请回忆登录前是否清空浏览器缓存（COOKIE），如果没有请清空并重新登录。还是不行的话，请不要使用私人账号，尝试用公用账号重新登录。依然不行的话，说明您被网站EH防火墙拦截，请挂载<b>欧美地区</b>的<b>私人V:P!И</b>，或<b>前往欧美国家</b>访问。<br />
+5.关于私人V:P!И<br />
+私人V:P!И指在注册、登录环节，必须使用唯一IP。EH防火墙系统设计为，24小时内同一IP只能被1个账号使用。即便有2人同时使用一个V:P!И，那也属于公共V:P!И，无法登录里站。所以必须使用欧美家庭宽带或者购买独立IP的VPS自建V:P!И。<br />
+6.关于DNS/HOSTS<br />
+DNS: 1.0.0.1 / 8.8.4.4<br />
+HOSTS: C:\Windows\System32\drivers\etc\hosts<br />
+1.0.0.250 e-hentai.org<br />
+1.0.0.250 forums.e-hentai.org<br />
+<br />
+<b>【登录原理】</b><br />
+这是分享给同行开发者研究的，普通用户请直接跳过。<br />
+正常登录：大陆防火墙（拦截EH表站）->EH表站论坛->输入账号（用户名称+密码原文）->生成密钥（用户ID+密码HASH）->EX里站（已有正确COOKIE则直接解锁）->EH表站API（查询登录状态）->EH防火墙（新号触发，拦截中国IP+日本IP）->EX里站AccessUrl->EX防火墙（拦截公共V:P!И）->写入EX里站COOKIE（ipb_pass_hash+ipb_member_id+igneous）->解锁里站<br />
+一键解锁：输入exkey->生成密钥（用户ID+密码HASH）->（服务器代理）EH表站API（查询登录状态）->（服务器代理）EH防火墙（新号触发，拦截中国IP+日本IP）->EX里站AccessUrl->EX防火墙（拦截公共V:P!И）->写入EX里站COOKIE（ipb_pass_hash+ipb_member_id+igneous）->解锁里站（本方式可跳过大陆防火墙，直接用官方接口登录里站。但如果您的账号本身没有权限，或者新注册使用中国IP登录，依然无法进入里区）<br />
+熊猫书签：输入exkey->生成密钥（用户ID+密码HASH）->写入EX里站COOKIE（ipb_pass_hash+ipb_member_id+igneous）->解锁里站（本方式直接跳过EH防火墙，无论账号新注册与否、被封与否，只要有igneous即可登录）<br />
+<br />
+<b id="apply">【应用创建】</b><br />
+输入exkey使用私有账号，留空使用公用账号：（公号不一定能用，可能已经被封了）<br />
+<input type="text" id="exkey" placeholder="exkey" onchange="document.getElementById('bookmark').style.display='none';document.getElementById('tpmonkey').style.display='none';if(this.value && (this.value.length<36 || !Number.isInteger(parseInt(this.value.split('x')[0].substr(32))))){this.style.backgroundColor='#FFDDDD';return;};if(this.value){window.location.hash=this.value;}else{history.replaceState(null,null,' ');};this.style.backgroundColor='';" /><br />
+如果填写了私有账号，可以收藏当前页面，方便下次使用。<br />
+<a href="javascript:;" onclick="bookmarkshow();"><u><b>+原始书签</b></u></a><br />
+可以在所有设备和浏览器运行，缺点是每个操作都要手动点击。公用账号无法使用设置、收藏、原图等。<br />
+<div id="bookmark" style="display:none;">
 <span id="bookmarkcode"></span><br />
-<br />
-<b>解锁 1.1</b><br />
-PC浏览器请直接将按钮“[panda]”拖入书签栏。<br />
-Android请使用<a href="https://www.mozilla.org/firefox" target="_blank"><u>Firefox</u></a>，长按按钮“[panda]”，将链接加入书签。<br />
-IOS请复制代码，将本页添加书签。点击地址栏，长按书签图标编辑，粘贴代码替换网址。<br />
-<img src="panda11.png" alt="" /><br />
-<br />
-<b>解锁 1.2</b><br />
-在任意网址（非空白页）运行书签，点击确定跳转至图标页。<br />
-<img src="panda12.png" alt="" /><br />
-<br />
-<b>解锁 1.3</b><br />
-在图标页再次运行书签即可解锁登录。<br />
-<img src="panda13.png" alt="" /><br />
-<br />
-<b>预览 2.1</b><br />
-在专辑预览页运行书签启动列表模式。<br />
-<img src="panda21.png" alt="" /><br />
-<br />
-<b>预览 2.2</b><br />
-输入图片范围（起始,结束），填写“0”加载全部。（图片过多时加载缓慢）<br />
-<img src="panda22.png" alt="" /><br />
-<br />
-<b>预览 2.3</b><br />
-是否加载原图？（需要下载权限且配额充足，更慢！）<br />
-<img src="panda23.png" alt="" /><br />
+1.PC浏览器请直接将按钮“[panda]”拖入书签栏。<br />
+2.IOS请复制代码，将本页添加书签。点击地址栏，长按书签图标编辑，粘贴代码替换网址。<br />
+3.Android请使用<a href="https://www.mozilla.org/firefox" target="_blank"><u>Firefox</u></a>，长按按钮“[panda]”，将链接加入书签。<br />
+4.在任意网址（非空白页）运行书签，点击确定跳转至图标页，然后再次运行书签即可解锁。<br />
+5.在专辑页面运行书签可开启扩展功能面板。<br />
 </div>
-<div id="unlocker">
-<a href="javascript:;" onclick="homepage();"><b>&larr;&nbsp;返回首页</b></a><br />
-<br />
-<b>即将跳转...</b><br />
-收藏本页快速登录<br />
-请勿修改公号设置<br />
+<a href="javascript:;" onclick="tpmonkeyshow();"><u><b>+油猴脚本</b></u></a><br />
+全自动加载运行脚本，浏览器需安装油猴扩展。IOS不能用安装，请使用原始书签。公用账号无法使用设置、收藏、原图等。<br />
+<div id="tpmonkey" style="display:none;">
+1.安装插件：<a href="https://tampermonkey.net/?locale=zh" target="_blank"><u>Tampermonkey</u></a><br />
+2.启用脚本：<a href="https://openuserjs.org/scripts/loligit/%E7%86%8A%E7%8C%AB%E4%B9%A6%E7%AD%BE" target="_blank"><u>Panda.user.js</u></a><br />
+3.解锁里站：<a href="https://exxx.ml" target="_blank"><u>exxx.ml</u></a>（大陆首次访问无法打开，所以请使用此地址做跳板）<br />
 </div>
+<a href="javascript:;" onclick="unlockershow();"><u><b>+一键解锁</b></u></a><br />
+使用前必须清空浏览器缓存，解锁失败几率较大，不推荐使用。公用账号受其他用户影响，浏览方式几乎每秒都会变，还有手贱的改设置屏蔽中文。<br />
+<br />
+<b>【扩展功能】</b><br />
+熊猫书签为里站开发了扩展功能面板，<b>原始书签</b>请在<b>专辑页面</b>运行书签开启面板，<b>油猴脚本</b>可以自动挂载功能面板，<b>一键解锁</b>不支持扩展功能。<br />
+竖屏浏览：更舒服地浏览图片。<br />
+打包下载：压缩指定范图片并下载。（<b>并没有实现</b>，招募开发者）<br />
+切换账号：输入exkey切换至另一个账号。<br />
+范围选择：浏览/打包哪些图片。<br />
+宽度设置：竖屏浏览图片的最大宽度。<br />
+原图开关：如果存在则优先浏览/打包原图。使用黑户（公用账号）登录时，开启会导致原图<b>加载失败</b>。<br />
+<br />
+<b>【关于本站】</b><br />
+<a href="https://assbbs.com/thread-170.htm" target="_blank"><u>Assbbs</u></a>：技术讨论帖<br />
+<a href="https://github.com/loligit/panda" target="_blank"><u>Github</u></a>：代码开源地址<br />
+<a href="http://evai.pl" target="_blank"><u>Evai.pl</u></a>：免费主机赞助商<br />
+<br />
 <script>
 if(window.location.hash){document.getElementById('exkey').value=window.location.hash.split('#').pop();};
 </script>
