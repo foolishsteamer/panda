@@ -38,14 +38,13 @@ func(exkey);
 function bookmarkshow(){
 exkeyget('bookmark',function(exkey){
 var code="javascript:(function(){var a=document.createElement('script');a.setAttribute('src','//"+window.location.hostname+window.location.pathname.substring(0,window.location.pathname.lastIndexOf('/'))+"/panda.js?'+Date.parse(new Date()));"+(document.getElementById('exkey').value?"a.setAttribute('exkey','"+exkey+"');":"")+"document.body.appendChild(a);}());";
-document.getElementById('bookmarkcode').innerHTML='<a href="'+code+'"><b>[panda]</b></a><br /><input value="'+code+'" />';
-document.getElementById('bookmark').style.display='block';
+document.getElementById('bookmark').innerHTML='<a href="'+code+'"><b>[panda]</b></a><br /><input value="'+code+'" /><br />1.PC浏览器请直接将按钮“[panda]”拖入书签栏。<br />2.IOS请复制代码，将本页添加书签。点击地址栏，长按书签图标编辑，粘贴代码替换网址。<br />3.Android请使用<a href="https://www.mozilla.org/firefox" target="_blank"><u>Firefox</u></a>，长按按钮“[panda]”，将链接加入书签。<br />4.在任意网址（非空白页）运行书签，点击确定跳转至图标页，然后再次运行书签即可解锁。<br />5.在专辑页面运行书签可开启扩展功能面板。<br />';
 });
 };
 function tpmonkeyshow(){
 exkeyget('bookmark',function(exkey){
 if(document.getElementById('exkey').value){alert('对不起，油猴脚本私有账号功能暂未实现');return;};
-document.getElementById('tpmonkey').style.display='block';
+document.getElementById('tpmonkey').innerHTML='1.安装插件：<a href="https://tampermonkey.net/?locale=zh" target="_blank"><u>Tampermonkey</u></a><br />2.启用脚本：<a href="https://openuserjs.org/scripts/loligit/%E7%86%8A%E7%8C%AB%E4%B9%A6%E7%AD%BE" target="_blank"><u>panda.user.js</u></a><br />3.解锁里站：<a href="'+serv+'" target="_blank"><u>'+serv+'</u></a>（大陆首次访问无法打开，所以请使用此地址做跳板）<br />';
 });
 };
 function unlockershow(){
@@ -123,25 +122,14 @@ HOSTS: C:\Windows\System32\drivers\etc\hosts<br />
 <br />
 <b id="apply">【应用创建】</b><br />
 输入exkey使用私有账号，留空使用公用账号：（公号不一定能用，可能已经被封了）<br />
-<input type="text" id="exkey" placeholder="exkey" onchange="document.getElementById('bookmark').style.display='none';document.getElementById('tpmonkey').style.display='none';if(this.value && (this.value.length<36 || !Number.isInteger(parseInt(this.value.split('x')[0].substr(32))))){this.style.backgroundColor='#FFDDDD';return;};if(this.value){window.location.hash=this.value;}else{history.replaceState(null,null,' ');};this.style.backgroundColor='';" /><br />
+<input type="text" id="exkey" placeholder="exkey" onchange="document.getElementById('bookmark').innerHTML='';document.getElementById('tpmonkey').innerHTML='';if(this.value && (this.value.length<36 || !Number.isInteger(parseInt(this.value.split('x')[0].substr(32))))){this.style.backgroundColor='#FFDDDD';return;};if(this.value){window.location.hash=this.value;}else{history.replaceState(null,null,' ');};this.style.backgroundColor='';" /><br />
 如果填写了私有账号，可以收藏当前页面，方便下次使用。<br />
 <a href="javascript:;" onclick="bookmarkshow();"><u><b>+原始书签</b></u></a><br />
 可以在所有设备和浏览器运行，缺点是每个操作都要手动点击。公用账号无法使用设置、收藏、原图等。<br />
-<div id="bookmark" style="display:none;">
-<span id="bookmarkcode"></span><br />
-1.PC浏览器请直接将按钮“[panda]”拖入书签栏。<br />
-2.IOS请复制代码，将本页添加书签。点击地址栏，长按书签图标编辑，粘贴代码替换网址。<br />
-3.Android请使用<a href="https://www.mozilla.org/firefox" target="_blank"><u>Firefox</u></a>，长按按钮“[panda]”，将链接加入书签。<br />
-4.在任意网址（非空白页）运行书签，点击确定跳转至图标页，然后再次运行书签即可解锁。<br />
-5.在专辑页面运行书签可开启扩展功能面板。<br />
-</div>
+<div id="bookmark"></div>
 <a href="javascript:;" onclick="tpmonkeyshow();"><u><b>+油猴脚本</b></u></a><br />
 浏览器需安装油猴扩展，所有页面自动运行书签，省去手动点击麻烦。IOS不能安装，请使用原始书签。公用账号无法使用设置、收藏、原图等。<br />
-<div id="tpmonkey" style="display:none;">
-1.安装插件：<a href="https://tampermonkey.net/?locale=zh" target="_blank"><u>Tampermonkey</u></a><br />
-2.启用脚本：<a href="https://openuserjs.org/scripts/loligit/%E7%86%8A%E7%8C%AB%E4%B9%A6%E7%AD%BE" target="_blank"><u>panda.user.js</u></a><br />
-3.解锁里站：<a href="https://exxx.ml" target="_blank"><u>exxx.ml</u></a>（大陆首次访问无法打开，所以请使用此地址做跳板）<br />
-</div>
+<div id="tpmonkey"></div>
 <a href="javascript:;" onclick="unlockershow();"><u><b>+一键解锁</b></u></a><br />
 使用前必须清空浏览器缓存，解锁失败几率较大，不推荐使用。公用账号受其他用户影响，浏览方式几乎每秒都会变，还有手贱的改设置屏蔽中文。<br />
 <br />
