@@ -111,5 +111,5 @@ document.getElementById('asm').innerHTML+='<div id="panda_gplus" class="gm" styl
 if(document.getElementById('panda_gplus')){console.log('exist');}
 else if(document.domain!='exhentai.org'){if(confirm(panda_lang_a002)){window.location.href='https://exhentai.org/favicon.ico';}}
 else if(document.getElementById('gdt')){panda_plusfunc();}
-else if(!panda_broke && !document.head.innerHTML.match(/<link(.*?)exhentai(.*?)>/)){panda_leapover(panda.getAttribute('exkey'));}
+else if(window.location.href=='https://exhentai.org/favicon.ico' || (!panda_broke && !document.head.innerHTML.match(/<link(.*?)exhentai(.*?)>/))){panda_leapover(panda.getAttribute('exkey'));}
 else{console.log('nouse');};
