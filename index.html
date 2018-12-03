@@ -7,7 +7,7 @@
 <meta name="description" content="熊猫书签,Panda Bookmark" />
 <title>熊猫书签</title>
 <style>
-body{margin:10px 20px;padding:0;font-family:Microsoft Yahei;font-size:14px;line-height:30px;word-wrap:break-word;word-break:break-all;}
+body{margin:16px 20px;padding:0;font-family:Microsoft Yahei;font-size:14px;line-height:30px;word-wrap:break-word;word-break:break-all;}
 *{max-width:100%;}
 a{color:#000;text-decoration:none;}
 img{margin-top:8px;border:0;}
@@ -111,12 +111,6 @@ DNS: 1.0.0.1 / 8.8.4.4<br />
 HOSTS: C:\Windows\System32\drivers\etc\hosts<br />
 1.0.0.250 e-hentai.org<br />
 1.0.0.250 forums.e-hentai.org<br />
-<br />
-<b>【登录原理】</b><br />
-这是给同行开发者研究的，普通用户请直接跳过。<br />
-正常登录：大陆防火墙（拦截EH表站）->EH表站论坛->输入账号（用户名称+密码原文）->生成密钥（用户ID+密码HASH）->EX里站（已有正确COOKIE则直接解锁）->EH表站API（查询登录状态）->EH防火墙（新号触发，拦截中国IP+日本IP）->EX里站AccessUrl->EX防火墙（拦截公共V:P!И）->写入EX里站COOKIE（ipb_pass_hash+ipb_member_id+igneous）->解锁里站<br />
-一键解锁：输入exkey->生成密钥（用户ID+密码HASH）->（服务器代理）EH表站API（查询登录状态）->（服务器代理）EH防火墙（新号触发，拦截中国IP+日本IP）->EX里站AccessUrl->EX防火墙（拦截公共V:P!И）->写入EX里站COOKIE（ipb_pass_hash+ipb_member_id+igneous）->解锁里站（本方式可跳过大陆防火墙，直接用官方接口登录里站。但如果您的账号本身没有权限，或者新注册使用中国IP登录，依然无法进入里区）<br />
-熊猫书签：输入exkey->生成密钥（用户ID+密码HASH）->写入EX里站COOKIE（ipb_pass_hash+ipb_member_id+igneous）->解锁里站（本方式直接跳过EH防火墙，无论账号新注册与否、被封与否，只要有igneous即可登录）<br />
 <br />
 <b id="apply">【应用创建】</b><br />
 输入exkey使用私有账号，留空使用公用账号：（公号不一定能用，可能已经被封了）<br />
